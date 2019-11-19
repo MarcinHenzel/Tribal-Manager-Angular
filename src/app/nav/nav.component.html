@@ -1,0 +1,16 @@
+<header>
+  <nav role="navigation">
+      <div class="menuToggle">
+        <div [class.hamburgerToggle]= "isNavVisible" class="hamburger" (click)="toggleNav()">
+            <span class="partial-ham hamburger1" [class.hamburgerToggle1]= "isNavVisible"></span>
+            <span class="partial-ham hamburger2" [class.hamburgerToggle2]= "isNavVisible"></span>
+            <span class="partial-ham hamburger3" [class.hamburgerToggle3]= "isNavVisible"></span>
+        </div>
+        <ul [class.transformToggle]= "isNavVisible" class="menu">
+          <li routerLink= "/">GrubyRange</li>
+          <li routerLink= "/attack-plan">ataki</li>
+          <li routerLink= "/">Kalkulator</li>
+        </ul>
+      </div>
+    </nav>
+</header>
