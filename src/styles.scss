@@ -1,5 +1,6 @@
 $darkGrey : #222;
 $lightGrey : #888;
+$blue : #4291a5f6;
 *, *:before, *:after {
   padding: 0;
   margin:0;
@@ -7,8 +8,8 @@ $lightGrey : #888;
 }
 body {
   font-size: 18px;
-  overflow-x: hidden;
+/*   overflow-x: hidden; */
   min-height: 100vh;
   font-family: 'Montserrat';
-  background: rgb(219, 235, 228);
+  background: rgb(230, 240, 236);
 }

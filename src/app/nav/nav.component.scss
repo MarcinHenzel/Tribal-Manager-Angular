@@ -69,16 +69,25 @@
 
 .menu {
   position: absolute;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
   height: 100vh;
   top: 0;
-  margin: 0 0 0 -130px;
+  margin: 0 0 0 -170px;
   padding: 60px 0;
-  background: #4291a5f6;
+  background: $blue;
   list-style-type: none;
   transform-origin: 0% 0%;
   transform: translate(100%, 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  box-shadow: 0 0 10px rgba(12, 12, 12, 0.623);
+
+  .emblem {
+    align-self: center;
+    position: absolute;
+    bottom: 10px;
+  }
 }
 
 .transformToggle {
@@ -87,8 +96,8 @@
 
 .menu li {
   padding: 5px 0 5px 30px;
-  font-size: 1.2em;
-  letter-spacing: 1px;
+  font-size: 1.3em;
+  font-weight: 500;
   cursor: pointer;
 
   &:hover {
