@@ -1,11 +1,13 @@
-import { TribalAttackPlanComponent } from './tribal-attack-plan/tribal-attack-plan.component';
+import { BestAttackPlanComponent } from './best-attack-plan/best-attack-plan.component';
+import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assign-orders.component';
 import { TribalNoblesComponent } from './tribal-nobles/tribal-nobles.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {path: '', component: TribalNoblesComponent},
-  {path: 'attack-plan', component: TribalAttackPlanComponent}
+  {path: 'tribal-assign-orders', component: TribalAssignOrdersComponent},
+  {path: 'best-attack-plan', component: BestAttackPlanComponent}
 ];
 
 @NgModule({

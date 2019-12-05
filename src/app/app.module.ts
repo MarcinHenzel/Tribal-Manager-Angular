@@ -1,26 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms'
+import { NgModule} from '@angular/core';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { TribalNoblesComponent } from './tribal-nobles/tribal-nobles.component';
-import { TribalAttackPlanComponent } from './tribal-attack-plan/tribal-attack-plan.component';
 import { ModalComponent } from './modal/modal.component';
+import { BestAttackPlanComponent } from './best-attack-plan/best-attack-plan.component';
+import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assign-orders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     TribalNoblesComponent,
-    TribalAttackPlanComponent,
-    ModalComponent
+    ModalComponent,
+    BestAttackPlanComponent,
+    TribalAssignOrdersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

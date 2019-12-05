@@ -1,0 +1,24 @@
+<main>
+  <div class="row">
+    <div class="date">
+      <span>Target time:</span>
+      <form [formGroup]="dateForm" novalidate>
+        <input type='number' formControlName="year" required value='2019' placeholder="year" id="destinationYear">
+        <input type='number' formControlName="month" required  placeholder="month" id="destinationMonth">
+        <input type='number' formControlName="day" required placeholder="day" id="destinationDay">
+        <input type='number' formControlName="hour" required placeholder="hour" id="destinationHour">
+        <input type='number' formControlName="minute" required  placeholder="minute" id="destinationMinute">
+        <textarea formControlName="source" placeholder="out of" class='areaInputs' id='offs'></textarea>
+        <textarea formControlName="targets" placeholder='targets' class='areaInputs' id='targets'></textarea>
+      </form>
+    </div>
+
+
+  </div>
+  <div class="row">
+
+  </div>
+  <button (click)="findBestAttackPlan()" id="inputs-btn">Find Best Attack Plan</button>
+  <div class="answer" id='answer'>
+  </div><p>{{dateForm.value | json}}</p>
+</main>

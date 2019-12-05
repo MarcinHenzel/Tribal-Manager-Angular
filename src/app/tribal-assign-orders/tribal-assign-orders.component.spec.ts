@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TribalAttackPlanComponent } from './tribal-attack-plan.component';
+import { TribalAssignOrdersComponent } from './tribal-assign-orders.component';
 
-describe('TribalAttackPlanComponent', () => {
-  let component: TribalAttackPlanComponent;
-  let fixture: ComponentFixture<TribalAttackPlanComponent>;
+describe('TribalAssignOrdersComponent', () => {
+  let component: TribalAssignOrdersComponent;
+  let fixture: ComponentFixture<TribalAssignOrdersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TribalAttackPlanComponent ]
+      declarations: [ TribalAssignOrdersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TribalAttackPlanComponent);
+    fixture = TestBed.createComponent(TribalAssignOrdersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
