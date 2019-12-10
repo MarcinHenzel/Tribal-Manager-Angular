@@ -5,7 +5,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UtilityService {
-
+  units: object = {
+    spear: 16.6667,
+    sword: 20.3667,
+    axe: 6.6667,
+    archer: 16.6667,
+    spy: 8.3333,
+    light: 9.2667,
+    mount: 9.2667,
+    heavy: 10.1833,
+    ram: 27.7833,
+    catapult: 27.7833,
+    paladin: 9.26667,
+    noble: 32.4,
+  }
   constructor() { }
 
   isPlayer(text: string): boolean {

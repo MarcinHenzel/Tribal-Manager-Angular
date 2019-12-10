@@ -1,24 +1,40 @@
 <main>
-  <div class="row">
-    <div class="date">
-      <span>Target time:</span>
-      <form [formGroup]="dateForm" novalidate>
-        <input type='number' formControlName="year" required value='2019' placeholder="year" id="destinationYear">
-        <input type='number' formControlName="month" required  placeholder="month" id="destinationMonth">
-        <input type='number' formControlName="day" required placeholder="day" id="destinationDay">
-        <input type='number' formControlName="hour" required placeholder="hour" id="destinationHour">
-        <input type='number' formControlName="minute" required  placeholder="minute" id="destinationMinute">
-        <textarea formControlName="source" placeholder="out of" class='areaInputs' id='offs'></textarea>
-        <textarea formControlName="targets" placeholder='targets' class='areaInputs' id='targets'></textarea>
-      </form>
-    </div>
-
-
-  </div>
-  <div class="row">
-
+  <div class="inputs-container">
+    <form class="time-form" [formGroup]="timeForm" novalidate>
+      <mat-form-field class="datetime-local">
+        <input matInput type="datetime-local" formControlName="destinationTime" placeholder="start date">
+      </mat-form-field>
+      <fieldset>
+        <h5>Sleep time</h5>
+        <mat-form-field class="sleepInput">
+          <mat-label>From</mat-label>
+          <input matInput type="number" formControlName="sleepFrom" min=0 max=24>
+        </mat-form-field>
+        <mat-form-field class="sleepInput">
+          <mat-label>To</mat-label>
+          <input matInput type="number" formControlName="sleepTo" min=0 max=24>
+        </mat-form-field>
+      </fieldset>
+      <mat-form-field class="armySpeed-container">
+        <mat-label>Army speed</mat-label>
+        <mat-select formControlName="unit" class="unitSelect">
+          <mat-option *ngFor="let unit of this.utilityService.units | keyvalue:keepOriginalOrder" [value]="unit.value">
+            {{unit.key}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <form class="coords-form" [formGroup]="coordsForm">
+      <label for="offs">Sender Villages: {{sources.value.split(' ').length-1}}</label>
+      <textarea #sources formControlName="sources"  placeholder="111|222 222|333 333|444..." class='coordInput' id='offs'></textarea>
+      <label for="targets">Targets: {{targets.value.split(' ').length-1}}</label>
+      <textarea #targets formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput' id='targets'></textarea>
+    </form>
   </div>
   <button (click)="findBestAttackPlan()" id="inputs-btn">Find Best Attack Plan</button>
   <div class="answer" id='answer'>
-  </div><p>{{dateForm.value | json}}</p>
+    <ul>
+      <li [ngClass]="{'sleepTime': answer.sleepTime}" *ngFor="let answer of orderArr; let i = index">
+        {{i+1}} {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}}</li>
+    </ul>
+  </div>
 </main>

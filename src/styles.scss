@@ -8,8 +8,9 @@ $blue : #4291a5f6;
 }
 body {
   font-size: 18px;
-/*   overflow-x: hidden; */
   min-height: 100vh;
   font-family: 'Montserrat';
   background: rgb(230, 240, 236);
 }
+
+html, body { height: 100%; };
