@@ -1,4 +1,4 @@
-import { IVillage } from './../interfaces/IVillage';
+import { IVillage } from './../interfaces';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -20,7 +20,6 @@ export class UtilityService {
     noble: 32.4,
   }
   constructor() { }
-
   isPlayer(text: string): boolean {
     if (text.length === 7 && text[3] === '|') {
       return false;

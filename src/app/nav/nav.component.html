@@ -7,9 +7,9 @@
             <span class="partial-ham hamburger3" [class.hamburgerToggle3]= "isNavVisible"></span>
         </div>
         <ul [class.transformToggle]= "isNavVisible" class="menu">
-          <li routerLink= "/">Nobles in range</li>
-          <li routerLink= "/tribal-assign-orders">Assign orders</li>
-          <li routerLink= "/best-attack-plan">Best attack plan</li>
+          <li routerLinkActive='active' routerLink= "/" [routerLinkActiveOptions]="{ exact: true }">Nobles in range</li>
+          <li routerLinkActive='active' routerLink= "/tribal-assign-orders">Assign orders</li>
+          <li routerLinkActive='active' routerLink= "/best-attack-plan">Best attack plan</li>
           <!-- <li routerLink= "/">Kalkulator</li> -->
         <img class="emblem" src= "../../assets/394633_large.png">
         </ul>

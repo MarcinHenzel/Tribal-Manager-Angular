@@ -1,9 +1,8 @@
+import { IVillage } from './../interfaces';
+import { IAllies } from './../interfaces';
 import { UtilityService } from './../services/utility.service';
 import { ModalService } from './../services/modal.service';
 import { Component, OnInit } from '@angular/core';
-import { IVillage } from '../interfaces/IVillage';
-import { IAllies } from '../interfaces/IAllies';
-import { ReferenceAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-tribal-nobles',
@@ -11,14 +10,12 @@ import { ReferenceAst } from '@angular/compiler';
   styleUrls: ['./tribal-nobles.component.scss']
 })
 export class TribalNoblesComponent implements OnInit {
-  /*   bodyText: string; */
   allies: Array<IAllies> = [];
   target: IVillage = { x: null, y: null };
   answerTable: Array<object> = [];
-  constructor(private modalService: ModalService, private utility: UtilityService) { }
-
+  constructor(private modalService: ModalService, public utility: UtilityService) {
+  }
   ngOnInit() {
-    /*     this.bodyText = 'This text can be updated in modal 1'; */
   }
   setAllies(value) {
     this.allies = [];
@@ -31,7 +28,7 @@ export class TribalNoblesComponent implements OnInit {
       }
     }
     this.start();
-    }
+  }
 
   setTarget(value) {
     const target = this.utility.transformToCoords(value);
@@ -54,7 +51,7 @@ export class TribalNoblesComponent implements OnInit {
 
       this.answerTable.push({ player, inRangeCounter, allCounter });
     }
-    }
+  }
 
   /*   openModal(id: string) {
       this.modalService.open(id);

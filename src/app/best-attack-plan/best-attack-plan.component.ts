@@ -1,7 +1,8 @@
-import { UtilityService } from './../services/utility.service';
+import { IOrder } from './../interfaces';
 import { Component, OnInit, Pipe } from '@angular/core';
 import * as moment from 'moment';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder, ValidatorFn } from '@angular/forms';
+import { UtilityService } from '../services/utility.service';
 @Component({
   selector: 'app-best-attack-plan',
   templateUrl: './best-attack-plan.component.html',
@@ -9,49 +10,54 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class BestAttackPlanComponent implements OnInit {
   timeForm: FormGroup;
+  orderArr: IOrder[];
   coordsForm: FormGroup;
-  orderArr: Array<object>;
+  units: any = this.utilityService.units;
   keepOriginalOrder = (a: any) => a.key;
-  constructor(private utilityService: UtilityService, private builder: FormBuilder) {
-    this.coordsForm = builder.group(
-      {
-        sources: '',
-        targets: ''
-      }
-    )
+  constructor(private utilityService: UtilityService, private fb: FormBuilder) {
+    this.coordsForm = this.fb.group({
+      sources: ['', Validators.required],
+      targets: ['', Validators.required],
+    }, { validator: [this.validateCoords] }
+    );
   }
-
   ngOnInit() {
-
-
-
-
     this.timeForm = new FormGroup({
       destinationTime: new FormControl(),
-      unit: new FormControl('ram'),
+      unit: new FormControl('ram', Validators.required),
       sleepFrom: new FormControl(),
       sleepTo: new FormControl()
     });
-    this.coordsForm = new FormGroup({
-      sources: new FormControl(),
-      targets: new FormControl()
-    })
   }
-
+  validateCoords: ValidatorFn = (fg: FormGroup) => {
+    if (this.amountOfCoords(fg.get('targets').value) === this.amountOfCoords(fg.get('sources').value)) {
+      return null;
+    } else {
+      return { validCoords: true };
+    }
+  }
+  amountOfCoords(coordsText: string, valueFlag: boolean = false): number | string[] {
+    const coords: string[] = coordsText.split(' ');
+    const pattern = /\d{3}\|\d{3}/;
+    const trueCoords = coords.filter((coord) => {
+      return pattern.test(coord);
+    });
+    return valueFlag ? trueCoords : trueCoords.length;
+  }
   findBestAttackPlan() {
     this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
   }
   pickBestSet() {
-    const offArr = this.coordsForm.value.sources.split(' ');
-    const targetArr = this.coordsForm.value.targets.split(' ');
+    const sourceArr = this.amountOfCoords(this.coordsForm.value.sources, true);
+    const targetArr = this.amountOfCoords(this.coordsForm.value.targets, true);
     let bestApproach = {
       orders: [],
       points: 0
     };
-    for (let i = 0; i < 2; i++) {
-      offArr.sort(() => Math.random() - 0.5);
-      targetArr.sort(() => Math.random() - 0.5);
-      const approach = this.createOrders(offArr, targetArr);
+    for (let i = 0; i < 12; i++) {
+      (sourceArr as string[]).sort(() => Math.random() - 0.5);
+      (targetArr as string[]).sort(() => Math.random() - 0.5);
+      const approach = this.createOrders(sourceArr, targetArr);
       if (bestApproach.points < approach.points) {
         bestApproach = {
           orders: approach.orders,
@@ -62,15 +68,15 @@ export class BestAttackPlanComponent implements OnInit {
     console.log(bestApproach.points);
     return bestApproach.orders;
   }
-  createOrders(offArr, targetArr) {
+  createOrders(sourceArr, targetArr) {
     const approach = { orders: [], points: 0 };
-    for (let i = 0; i < offArr.length; i++) {
-      const distance = this.utilityService.countDistance(offArr[i], targetArr[i]);
+    for (let i = 0; i < sourceArr.length; i++) {
+      const distance = this.utilityService.countDistance(sourceArr[i], targetArr[i]);
       const ms = Math.floor(distance * this.timeForm.value.unit * 60 * 1000);
       const timeAttack = moment(new Date(this.timeForm.value.destinationTime)).subtract(ms, 'ms');
 
-      const obj = {
-        from: offArr[i],
+      const obj: IOrder = {
+        from: sourceArr[i],
         to: targetArr[i],
         distance,
         ms,

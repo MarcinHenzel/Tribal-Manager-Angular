@@ -1,12 +1,13 @@
 <main>
   <div class="inputs-container">
     <form class="time-form" [formGroup]="timeForm" novalidate>
+      <h3>Attack time</h3>
       <mat-form-field class="datetime-local">
-        <input matInput type="datetime-local" formControlName="destinationTime" placeholder="start date">
+        <input matInput type="datetime-local" formControlName="destinationTime" >
       </mat-form-field>
       <fieldset>
-        <h5>Sleep time</h5>
-        <mat-form-field class="sleepInput">
+        <h3>Sleep time</h3>
+        <mat-form-field class="sleepInput first">
           <mat-label>From</mat-label>
           <input matInput type="number" formControlName="sleepFrom" min=0 max=24>
         </mat-form-field>
@@ -18,23 +19,30 @@
       <mat-form-field class="armySpeed-container">
         <mat-label>Army speed</mat-label>
         <mat-select formControlName="unit" class="unitSelect">
-          <mat-option *ngFor="let unit of this.utilityService.units | keyvalue:keepOriginalOrder" [value]="unit.value">
+          <mat-option *ngFor="let unit of units | keyvalue:keepOriginalOrder" [value]="unit.value">
             {{unit.key}}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
-    <form class="coords-form" [formGroup]="coordsForm">
-      <label for="offs">Sender Villages: {{sources.value.split(' ').length-1}}</label>
-      <textarea #sources formControlName="sources"  placeholder="111|222 222|333 333|444..." class='coordInput' id='offs'></textarea>
-      <label for="targets">Targets: {{targets.value.split(' ').length-1}}</label>
-      <textarea #targets formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput' id='targets'></textarea>
+    <form class="coords-form" [formGroup]='coordsForm'>
+      <h3>Senders<span *ngIf='coordsForm.value.sources'>: {{amountOfCoords(coordsForm.get('sources').value)}}</span></h3>
+      <textarea formControlName="sources" placeholder="111|222 222|333 333|444..." class='coordInput'
+        id='offs'></textarea>
+        <h3>Targets<span *ngIf='coordsForm.value.targets'>: {{amountOfCoords(coordsForm.get('targets').value)}}</span></h3>
+      <textarea formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput'
+        id='targets'></textarea>
+      <div *ngIf="!coordsForm.valid && coordsForm.dirty">
+        Name is required.
+      </div>
     </form>
   </div>
-  <button (click)="findBestAttackPlan()" id="inputs-btn">Find Best Attack Plan</button>
+  <button class="bestAttackPlan-btn" (click)="findBestAttackPlan()" id="inputs-btn">Find Best Attack Plan</button>
   <div class="answer" id='answer'>
     <ul>
-      <li [ngClass]="{'sleepTime': answer.sleepTime}" *ngFor="let answer of orderArr; let i = index">
-        {{i+1}} {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}}</li>
+      <li class="bold" [ngClass]="{'sleepTime': answer.sleepTime, 'normalTime': !answer.sleepTime}"
+        *ngFor="let answer of orderArr; let i = index">
+        {{i+1}}. {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}} <span
+          *ngIf='answer.sleepTime'>Sleep Time</span> </li>
     </ul>
   </div>
 </main>

@@ -3,43 +3,53 @@
 main {
   display: flex;
   max-height: 100vh;
+  color: $darkGrey;
 }
 .inputs-container {
+  padding: 10px;
+  margin-right: 5px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  align-items: center;
-  justify-content: space-around;
-  width: 35vw;
+  width: 345px;
+  * {
+    color: $darkBlue;
+  }
+/*   box-shadow: 0px 0 22px rgba(12, 12, 12, 0.219); */
 }
 .datetime-local {
+  width: 260px;
   .time-form {
+    width: 100%;
     display: flex;
-    align-items: flex-start;
-
-    mat-form-field {
-      margin: 0 1em;
+  }
+}
+fieldset {
+  all: unset;
+  width: 90%;
+}
+.sleepInput {
+  width: 125px;
+  padding: 0;
+  &::ng-deep {
+    input {
+      padding: 0px;
     }
   }
-  width: 260px;
-}
-
-.sleepInput {
-  margin: 0 5px;
-  width: 60px;
-
   input::placeholder {
     font-size: 12px;
   }
+  &.first {
+    margin-right: 8px;
+  }
 }
-
-.unitSelect {
-  width: 180px;
+.armySpeed-container {
+  width: 260px;
 }
 .coords-form {
   display: flex;
-  width: 98%;
-  height: 60%;
+  width: 100%;
+  height: 70%;
   flex-direction: column;
   align-items: center;
   & label {
@@ -47,20 +57,27 @@ main {
   }
 }
 .coordInput {
-  height: 49%;
+  height: 100%;
   width: 100%;
   resize: none;
   &::placeholder {
     font-size: 1rem;
   }
-
 }
-
 .answer {
   flex: 1;
   margin: 5px;
   overflow: auto;
 }
 .sleepTime {
-  background-color: red ;
+  color: rgb(156, 21, 21);
+}
+.bestAttackPlan-btn {
+  margin: 0 10px;
+}
+.normalTime {
+  color: rgb(26, 150, 47);
+}
+.bold {
+  font-weight: 600;
 }
