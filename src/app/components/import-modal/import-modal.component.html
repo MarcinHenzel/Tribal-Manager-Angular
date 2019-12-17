@@ -1,0 +1,11 @@
+<div class="flex-container">
+  <i class="fas fa-check-circle">s</i>
+  <fa-icon [icon]='faCheckCircle'></fa-icon>
+  <div class="header">
+    <ng-content class="abc"></ng-content>
+    <span class="close" >&times;</span>
+  </div>
+  <textarea class="content" [(ngModel)]='data' placeholder="111|222 offs &#10;111|222 offs"
+    id='targetsImport'></textarea>
+  <button class="import" (click)="closeModal.emit(dataToArray(data))">Import</button>
+</div>

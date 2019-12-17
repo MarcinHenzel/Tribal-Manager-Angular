@@ -1,0 +1,29 @@
+<table class="table">
+  <thead class="thead">
+    <tr class="row">
+      <th class='row__th--wide'><a class='row__th__import' (click)="showModal()">Import</a></th>
+    </tr>
+    <tr class="row ">
+      <ng-content select='.col-one'></ng-content>
+      <ng-content select='.col-two'></ng-content>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="row " id={{row.id}} *ngFor="let row of modalInput">
+      <td class="row__td">{{row.col1}}</td>
+      <td class="row__td">
+        <input type="text" name= {{row.id}} value={{row.col2}}>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr class="row">
+      <th class='row__th'> <span id="targetsCount">{{modalInput?.length}}</span></th>
+      <th class='row__th'> <span id="targetsOffsCount">{{offsAmount}}</span></th>
+    </tr>
+  </tfoot>
+</table>
+
+<app-import-modal [@appearAnimation]='isModalVisible' (closeModal)='closeModal($event)' *ngIf='isModalVisible' class="popup" #modal>
+  <ng-content select="h2"></ng-content>
+</app-import-modal>

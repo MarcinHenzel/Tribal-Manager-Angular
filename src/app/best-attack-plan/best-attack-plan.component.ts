@@ -1,7 +1,7 @@
 import { IOrder } from './../interfaces';
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn } from '@angular/forms';
 import { UtilityService } from '../services/utility.service';
 @Component({
   selector: 'app-best-attack-plan',
@@ -30,13 +30,13 @@ export class BestAttackPlanComponent implements OnInit {
     });
   }
   validateCoords: ValidatorFn = (fg: FormGroup) => {
-    if (this.amountOfCoords(fg.get('targets').value) === this.amountOfCoords(fg.get('sources').value)) {
+    if (this.coordsFromString(fg.get('targets').value) === this.coordsFromString(fg.get('sources').value)) {
       return null;
     } else {
       return { validCoords: true };
     }
   }
-  amountOfCoords(coordsText: string, valueFlag: boolean = false): number | string[] {
+  coordsFromString(coordsText: string, valueFlag: boolean = false): number | string[] {
     const coords: string[] = coordsText.split(' ');
     const pattern = /\d{3}\|\d{3}/;
     const trueCoords = coords.filter((coord) => {
@@ -48,13 +48,13 @@ export class BestAttackPlanComponent implements OnInit {
     this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
   }
   pickBestSet() {
-    const sourceArr = this.amountOfCoords(this.coordsForm.value.sources, true);
-    const targetArr = this.amountOfCoords(this.coordsForm.value.targets, true);
+    const sourceArr = this.coordsFromString(this.coordsForm.value.sources, true);
+    const targetArr = this.coordsFromString(this.coordsForm.value.targets, true);
     let bestApproach = {
       orders: [],
       points: 0
     };
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 20000; i++) {
       (sourceArr as string[]).sort(() => Math.random() - 0.5);
       (targetArr as string[]).sort(() => Math.random() - 0.5);
       const approach = this.createOrders(sourceArr, targetArr);

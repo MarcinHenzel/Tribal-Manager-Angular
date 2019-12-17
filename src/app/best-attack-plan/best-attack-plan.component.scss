@@ -1,5 +1,5 @@
 @import "../../styles.scss";
-
+$blueBorder: rgb(169, 184, 212);
 main {
   display: flex;
   max-height: 100vh;
@@ -15,7 +15,6 @@ main {
   * {
     color: $darkBlue;
   }
-/*   box-shadow: 0px 0 22px rgba(12, 12, 12, 0.219); */
 }
 .datetime-local {
   width: 260px;
@@ -24,18 +23,13 @@ main {
     display: flex;
   }
 }
-fieldset {
-  all: unset;
-  width: 90%;
+.sleep-container {
+  padding-left: 5px;
+  margin-bottom: 15px;
+  border: 1px solid $blueBorder;
 }
 .sleepInput {
   width: 125px;
-  padding: 0;
-  &::ng-deep {
-    input {
-      padding: 0px;
-    }
-  }
   input::placeholder {
     font-size: 12px;
   }
@@ -60,6 +54,7 @@ fieldset {
   height: 100%;
   width: 100%;
   resize: none;
+  border-color: $blueBorder;
   &::placeholder {
     font-size: 1rem;
   }

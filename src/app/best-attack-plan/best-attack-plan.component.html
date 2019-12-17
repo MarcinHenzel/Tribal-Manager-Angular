@@ -1,11 +1,7 @@
 <main>
   <div class="inputs-container">
     <form class="time-form" [formGroup]="timeForm" novalidate>
-      <h3>Attack time</h3>
-      <mat-form-field class="datetime-local">
-        <input matInput type="datetime-local" formControlName="destinationTime" >
-      </mat-form-field>
-      <fieldset>
+      <fieldset class="sleep-container">
         <h3>Sleep time</h3>
         <mat-form-field class="sleepInput first">
           <mat-label>From</mat-label>
@@ -16,6 +12,11 @@
           <input matInput type="number" formControlName="sleepTo" min=0 max=24>
         </mat-form-field>
       </fieldset>
+      <mat-form-field class="datetime-local">
+        <mat-label>Attack time</mat-label>
+        <input matInput type="datetime-local" formControlName="destinationTime">
+      </mat-form-field>
+
       <mat-form-field class="armySpeed-container">
         <mat-label>Army speed</mat-label>
         <mat-select formControlName="unit" class="unitSelect">
@@ -25,10 +26,12 @@
       </mat-form-field>
     </form>
     <form class="coords-form" [formGroup]='coordsForm'>
-      <h3>Senders<span *ngIf='coordsForm.value.sources'>: {{amountOfCoords(coordsForm.get('sources').value)}}</span></h3>
+      <h3>Senders<span *ngIf='coordsForm.value.sources'>: {{coordsFromString(coordsForm.get('sources').value)}}</span>
+      </h3>
       <textarea formControlName="sources" placeholder="111|222 222|333 333|444..." class='coordInput'
         id='offs'></textarea>
-        <h3>Targets<span *ngIf='coordsForm.value.targets'>: {{amountOfCoords(coordsForm.get('targets').value)}}</span></h3>
+      <h3>Targets<span *ngIf='coordsForm.value.targets'>: {{coordsFromString(coordsForm.get('targets').value)}}</span>
+      </h3>
       <textarea formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput'
         id='targets'></textarea>
       <div *ngIf="!coordsForm.valid && coordsForm.dirty">

@@ -1,0 +1,134 @@
+$white: rgb(230, 230, 230);
+$gold-white: rgb(245, 241, 185);
+$lightgrey: rgb(70, 70, 70);
+@mixin table {
+  margin-right: 5px;
+  height: 100vh;
+  width: 320px;
+  box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-flow: column;
+}
+
+@mixin tableColumn {
+  width: 50%;
+  padding: 0.3em 0;
+  text-align: center;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin row {
+  width: 100%;
+  display: flex;
+
+  &__th {
+    @include tableColumn();
+    border: 1px solid $white;
+    background-color: $lightgrey;
+    color: $white;
+    height: 35px;
+
+    &--wide {
+      display: block;
+      word-break: break-all;
+      border: 1px solid $white;
+      background-color: $lightgrey;
+      color: $white;
+      height: 35px;
+      width: 100%;
+      padding: 0;
+    }
+
+    &__import {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      text-decoration: none;
+      cursor: pointer;
+      height: 100%;
+      width: 100%;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $gold-white;
+      }
+    }
+  }
+
+  &__td {
+    @include tableColumn();
+    border-bottom: 1px solid $white;
+    border-top: 1px solid $white;
+
+    .answer-textarea {
+      background-color: rgb(228, 226, 201);
+      padding-left: 1px;
+      color: $lightgrey;
+      max-width: 80px;
+      width: 100%;
+      min-height: 30px;
+      font-size: 12px;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+    }
+
+    &__input {
+      all: unset;
+      width: 100%;
+      cursor: pointer;
+      font-weight: 900;
+    }
+  }
+}
+
+body {
+  font-family: Verdana, Arial;
+  background: $white;
+}
+
+main {
+  display: flex;
+  justify-content: left;
+}
+
+.table {
+  @include table();
+
+  .row {
+    @include row();
+
+    &:nth-child(even) {
+      background-color: rgba(117, 118, 175, 0.678);
+    }
+
+    &:nth-child(odd) {
+      background-color: rgba(255, 0, 0, 0.15);
+    }
+  }
+
+  @media (max-width: 960px) {
+    font-size: 12px;
+  }
+}
+
+thead,
+tbody,
+tfoot {
+  display: block;
+  width: 100%;
+}
+
+tbody {
+  flex: 1;
+
+  overflow: {
+    y: auto;
+    x: hidden;
+  }
+}

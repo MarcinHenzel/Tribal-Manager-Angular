@@ -12,6 +12,9 @@ import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assig
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { InputTableComponent } from './components/input-table/input-table.component';
+import { ImportModalComponent } from './components/import-modal/import-modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +23,8 @@ import { MaterialModule } from './material.module';
     ModalComponent,
     BestAttackPlanComponent,
     TribalAssignOrdersComponent,
+    InputTableComponent,
+    ImportModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { MaterialModule } from './material.module';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
