@@ -14,23 +14,23 @@ export interface Village {
 export class RepetitionCounterComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  answerArr: Village[] = [{ village: 'dsa', amount: 13 }, { village: 'ds2222', amount: 12 }];
-  displayedColumns: string[] = ['Village', 'Attacks'];
-  dataSource = new MatTableDataSource(this.answerArr);
+  displayedColumns: string[] = ['village', 'amount'];
+  dataSource = new MatTableDataSource();
   constructor() { }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   getTotalAmount() {
-    return this.answerArr.map(t => t.amount).reduce((acc, value) => acc + value, 0);
+    return this.dataSource.data.map((t: Village) => t.amount).reduce((acc, value) => acc + value, 0);
   }
   openFile = (event) => {
-    this.answerArr = [];
+    this.dataSource.data = [];
     for (const file of event.target.files) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -38,7 +38,6 @@ export class RepetitionCounterComponent implements OnInit {
       };
       reader.readAsText(file);
     }
-
   }
 
   scrapeData(text) {
@@ -48,14 +47,14 @@ export class RepetitionCounterComponent implements OnInit {
   }
   applyData(villageTable) {
     villageTable.forEach((xy) => {
-      const found = this.answerArr.find((ans) => ans.village === xy);
+      const found: any = this.dataSource.data.find((ans: Village) => ans.village === xy);
       if (found) {
         found.amount++;
       } else {
-        this.answerArr.push({ village: xy, amount: 1 });
+        this.dataSource.data.push({ village: xy, amount: 1 });
       }
     });
-    this.table.renderRows();
+    this.dataSource.data = this.dataSource.data;
   }
 
 }
