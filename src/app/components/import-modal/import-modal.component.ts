@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-import-modal',
   templateUrl: './import-modal.component.html',
@@ -7,8 +6,7 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 })
 export class ImportModalComponent implements OnInit {
   data: string = null;
-  faCheckCircle = faCheckCircle;
-  @Output() closeModal: EventEmitter<string> = new EventEmitter();
+  @Output() closeModal: EventEmitter<object[]> = new EventEmitter();
 
   constructor() { }
 

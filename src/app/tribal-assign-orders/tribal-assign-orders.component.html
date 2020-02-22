@@ -1,15 +1,14 @@
 <main>
-  <app-input-table>
+  <app-input-table (dataEmitter)="getTargetData($event)">
     <th class='col-one row__th'>X|Y</th>
     <th class='col-two row__th'>Offs</th>
-    <h2>Players</h2>
-<!--     <textarea class="popup__content" id='answersExport'></textarea> -->
+    <h2>Targets</h2>
   </app-input-table>
-  <app-input-table>
+  <app-input-table (dataEmitter)="getPlayerData($event)">
     <th class='col-one row__th'>Players</th>
     <th class='col-two row__th'>Offs</th>
-    <h2>Orders</h2>
-<!--     <textarea class="popup__content" id='answersExport'></textarea>
- -->
+    <h2>Players</h2>
   </app-input-table>
+  <button class='btn-generate animated bounce' (click)='run()'>Generate</button>
+  <app-answer-table [data]='data'></app-answer-table>
 </main>

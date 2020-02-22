@@ -12,7 +12,7 @@ export class BestAttackPlanComponent implements OnInit {
   timeForm: FormGroup;
   orderArr: IOrder[];
   coordsForm: FormGroup;
-  units: any = this.utilityService.units;
+  units: any = this.utilityService.unitsSpeed;
   keepOriginalOrder = (a: any) => a.key;
   constructor(private utilityService: UtilityService, private fb: FormBuilder) {
     this.coordsForm = this.fb.group({
@@ -24,7 +24,7 @@ export class BestAttackPlanComponent implements OnInit {
   ngOnInit() {
     this.timeForm = new FormGroup({
       destinationTime: new FormControl(),
-      unit: new FormControl('ram', Validators.required),
+      unit: new FormControl(),
       sleepFrom: new FormControl(),
       sleepTo: new FormControl()
     });
@@ -36,13 +36,13 @@ export class BestAttackPlanComponent implements OnInit {
       return { validCoords: true };
     }
   }
-  coordsFromString(coordsText: string, valueFlag: boolean = false): number | string[] {
+  coordsFromString(coordsText: string, lengthFlag: boolean = false): number | string[] {
     const coords: string[] = coordsText.split(' ');
     const pattern = /\d{3}\|\d{3}/;
     const trueCoords = coords.filter((coord) => {
       return pattern.test(coord);
     });
-    return valueFlag ? trueCoords : trueCoords.length;
+    return lengthFlag ? trueCoords : trueCoords.length;
   }
   findBestAttackPlan() {
     this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
@@ -65,7 +65,7 @@ export class BestAttackPlanComponent implements OnInit {
         };
       }
     }
-    console.log(bestApproach.points);
+/*     console.log(bestApproach.points); */
     return bestApproach.orders;
   }
   createOrders(sourceArr, targetArr) {

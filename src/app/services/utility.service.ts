@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UtilityService {
-  units: object = {
+  unitsSpeed: object = {
     spear: 16.6667,
     sword: 20.3667,
     axe: 6.6667,

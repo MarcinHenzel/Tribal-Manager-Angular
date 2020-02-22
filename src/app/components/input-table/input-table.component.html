@@ -12,7 +12,7 @@
     <tr class="row " id={{row.id}} *ngFor="let row of modalInput">
       <td class="row__td">{{row.col1}}</td>
       <td class="row__td">
-        <input type="text" name= {{row.id}} value={{row.col2}}>
+        <input class="row__td__input" type="text" name={{row.id}} value={{row.col2}}>
       </td>
     </tr>
   </tbody>
@@ -24,6 +24,7 @@
   </tfoot>
 </table>
 
-<app-import-modal [@appearAnimation]='isModalVisible' (closeModal)='closeModal($event)' *ngIf='isModalVisible' class="popup" #modal>
+<app-import-modal [@appearAnimation]='isModalVisible' (closeModal)='closeModal($event)' *ngIf='isModalVisible'
+  class="popup" #modal>
   <ng-content select="h2"></ng-content>
 </app-import-modal>

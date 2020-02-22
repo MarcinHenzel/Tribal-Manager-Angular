@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
 @Component({
@@ -22,7 +22,8 @@ export class InputTableComponent implements OnInit {
   modalInput: any[];
   tableLength: number;
   offsAmount: number;
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  constructor(private el: ElementRef) { }
+  @Output() dataEmitter: EventEmitter<any> = new EventEmitter();
   @HostListener('document:click', ['$event.target'])
   clickout(target: HTMLElement) {
     if (!this.el.nativeElement.contains(target)) {
@@ -40,6 +41,7 @@ export class InputTableComponent implements OnInit {
     this.offsAmount = data.reduce((total, obj) => {
       return total + parseInt(obj.col2, 10);
     }, 0);
+    this.dataEmitter.emit(this.modalInput);
   }
 
 }

@@ -1,6 +1,4 @@
-$white: rgb(230, 230, 230);
-$gold-white: rgb(245, 241, 185);
-$lightgrey: rgb(70, 70, 70);
+@import "../../../styles.scss";
 @mixin table {
   margin-right: 5px;
   height: 100vh;
@@ -87,15 +85,7 @@ $lightgrey: rgb(70, 70, 70);
   }
 }
 
-body {
-  font-family: Verdana, Arial;
-  background: $white;
-}
 
-main {
-  display: flex;
-  justify-content: left;
-}
 
 .table {
   @include table();
@@ -113,7 +103,7 @@ main {
   }
 
   @media (max-width: 960px) {
-    font-size: 12px;
+    font-size: 15px;
   }
 }
 
@@ -126,9 +116,6 @@ tfoot {
 
 tbody {
   flex: 1;
-
-  overflow: {
-    y: auto;
-    x: hidden;
-  }
+  overflow-x: hidden;
+  overflow-y: auto;
 }

@@ -1,7 +1,6 @@
 import { IVillage } from './../interfaces';
 import { IAllies } from './../interfaces';
 import { UtilityService } from './../services/utility.service';
-import { ModalService } from './../services/modal.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,8 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class TribalNoblesComponent implements OnInit {
   allies: Array<IAllies> = [];
   target: IVillage = { x: null, y: null };
-  answerTable: Array<object> = [];
-  constructor(private modalService: ModalService, public utility: UtilityService) {
+  answerTable: Array<any> = [];
+  constructor(public utility: UtilityService) {
   }
   ngOnInit() {
   }

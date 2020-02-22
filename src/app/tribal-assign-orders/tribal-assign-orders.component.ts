@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AnswerTableComponent } from '../components/answer-table/answer-table.component';
 
 @Component({
   selector: 'app-tribal-assign-orders',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tribal-assign-orders.component.scss']
 })
 export class TribalAssignOrdersComponent implements OnInit {
-
+  data = { targets: [], players: [], ordersPerTarget: 2, randomTargetFactor: 1 };
   constructor() { }
-
+  @ViewChild(AnswerTableComponent , {static: false}) answerTable: AnswerTableComponent;
   ngOnInit() {
   }
-
+  getTargetData(data) {
+    this.data.targets = data.map((item) => {
+      return { xy: item.col1, offs: item.col2 };
+    })
+  }
+  getPlayerData(data) {
+    this.data.players = data.map((item) => {
+      return { player: item.col1, hasOffs: item.col2 };
+    })
+  }
+  run() {
+    console.log(this.data);
+    this.answerTable.assignOffs();
+  }
 }
