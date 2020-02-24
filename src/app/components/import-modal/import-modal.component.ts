@@ -13,7 +13,7 @@ export class ImportModalComponent implements OnInit {
   ngOnInit() {
   }
   dataToArray(data) {
-    let arr: object[] = [];
+    const arr: object[] = [];
     const rows = data.split('\n');
     for (let i = 0; i < rows.length; i++) {
       const index = rows[i].split(' ');

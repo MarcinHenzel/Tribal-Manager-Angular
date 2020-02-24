@@ -18,6 +18,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RepetitionCounterComponent } from './repetition-counter/repetition-counter.component';
 import { MatTableModule } from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,7 @@ import {MatSortModule} from '@angular/material/sort';
     InputTableComponent,
     ImportModalComponent,
     AnswerTableComponent,
-    RepetitionCounterComponent
+    RepetitionCounterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,12 @@ import {MatSortModule} from '@angular/material/sort';
     MaterialModule,
     FontAwesomeModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

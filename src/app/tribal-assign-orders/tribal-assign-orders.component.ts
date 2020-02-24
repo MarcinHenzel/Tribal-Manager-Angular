@@ -15,12 +15,12 @@ export class TribalAssignOrdersComponent implements OnInit {
   getTargetData(data) {
     this.data.targets = data.map((item) => {
       return { xy: item.col1, offs: item.col2 };
-    })
+    });
   }
   getPlayerData(data) {
     this.data.players = data.map((item) => {
       return { player: item.col1, hasOffs: item.col2 };
-    })
+    });
   }
   run() {
     console.log(this.data);

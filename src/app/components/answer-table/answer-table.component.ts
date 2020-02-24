@@ -20,7 +20,7 @@ export class AnswerTableComponent implements OnInit {
   showModal = () => this.isModalVisible = true;
 
   targetsToReducedStr(order): string {
-    let orderClone = JSON.parse(JSON.stringify(order));
+    const orderClone = JSON.parse(JSON.stringify(order));
     let str = orderClone.player;
     for (let j = 0; j < orderClone.targets.length; j++) {
       const xy = orderClone.targets[j];
@@ -84,8 +84,7 @@ export class AnswerTableComponent implements OnInit {
     if (Math.random() > 0.5) { return this.data.ordersPerTarget + variation; } else {
       if ((this.data.ordersPerTarget - variation) >= 1) {
         return this.data.ordersPerTarget - variation;
-      }
-      else {
+      } else {
         return 1;
       }
     }
