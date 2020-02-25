@@ -11,6 +11,6 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   users: Observable<any[]>;
   constructor(firestore: AngularFirestore, private http: HttpClient) {
-    firestore.collection('Users').add({name: 'Marek', surname: 'Kopytko'});
+    /* firestore.collection('Users').add({name: 'Marek', surname: 'Kopytko'}); */
   }
 }

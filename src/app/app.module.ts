@@ -1,3 +1,5 @@
+import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from './services/auth.service';
 import { AnswerTableComponent } from './components/answer-table/answer-table.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -23,6 +25,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     ImportModalComponent,
     AnswerTableComponent,
     RepetitionCounterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +54,10 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
