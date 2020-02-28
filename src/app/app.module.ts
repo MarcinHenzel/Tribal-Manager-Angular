@@ -26,6 +26,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { LoginComponent } from './components/login/login.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     HttpClientModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxSmartModalModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

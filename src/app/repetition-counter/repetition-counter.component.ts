@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable, MatSort } from '@angular/material';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 export interface Village {
   village: string;
   amount: any;
@@ -17,9 +18,12 @@ export interface Raport {
 export class RepetitionCounterComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   displayedColumns: string[] = ['village', 'amount'];
   dataSource = new MatTableDataSource();
-  constructor() { }
+  // modal lib https://github.com/biig-io/ngx-smart-modal
+  constructor(public ngxSmartModalService: NgxSmartModalService) {
+  }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
@@ -44,7 +48,7 @@ export class RepetitionCounterComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.applyData(this.scrapeData(reader.result));
-        console.log(this.dataSource.data);
+        this.ngxSmartModalService.setModalData(this.dataSource.data, 'myModal');
       };
       reader.readAsText(file);
     }

@@ -1,5 +1,5 @@
 <input type='file' multiple  (change)='openFile($event)'><br>
-
+<button (click)="ngxSmartModalService.getModal('myModal').open()">Export</button>
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput #filter (keyup)="applyFilter($event)" placeholder="Filtruj">
@@ -23,6 +23,14 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
-<app-login></app-login>
+<!-- <app-login></app-login> -->
 
 
+<ngx-smart-modal #myModal identifier="myModal" identifier="myModal">
+  <h1>Data:</h1>
+  <div class="data-container">
+    <p>Village attacks</p>
+    <p *ngFor="let row of myModal.getData()" >{{row.village}} {{row.amount}}</p>
+  </div>
+  <button (click)="myModal.close()">Close</button>
+</ngx-smart-modal>
