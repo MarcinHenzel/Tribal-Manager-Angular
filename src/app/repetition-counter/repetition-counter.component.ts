@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable, MatSort } from '@angular/material';
 export interface Village {
   village: string;
-  amount: number;
+  amount: any;
 }
-
+export interface Raport {
+  attacked: string;
+  attackers: string[];
+}
 @Component({
   selector: 'app-repetition-counter',
   templateUrl: './repetition-counter.component.html',
@@ -20,33 +23,62 @@ export class RepetitionCounterComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-
   }
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   getTotalAmount() {
-    return this.dataSource.data.map((t: Village) => t.amount).reduce((acc, value) => acc + value, 0);
+    console.log(this.dataSource.data);
+    return this.dataSource.data.map((t: Village) => t.amount).reduce((acc, value) => {
+      if (typeof value === 'string') {
+        return ++acc;
+      } else {
+        return acc + value;
+      }
+    }, 0);
   }
   openFile = (event) => {
     this.dataSource.data = [];
     for (const file of event.target.files) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.applyData(this.scrapeData(reader.result));
+        this.dataSource.data = this.applyData(this.scrapeData(reader.result));
       };
       reader.readAsText(file);
     }
   }
 
   scrapeData(text) {
+    const raports: Raport[] = [];
+    const splitTexts = text.split('[b]Wioska');
+    splitTexts.shift();
+
+    splitTexts.forEach((splitText) => {
+      const attackers = this.getAttackers(splitText);
+      const attacked = splitText.match(/[0-9]{3}\|[0-9]{3}/)[0];
+      raports.push({ attacked, attackers });
+    });
+    return { allAttackers: this.getAttackers(text), raports };
+  }
+  getAttackers = (text): string[] => {
     return Array.from(text.matchAll(/\[coord\](.*?)\[\/coord\] -->/g)).map((table) => {
       return table[1];
     });
   }
-  applyData(villageTable) {
-    villageTable.forEach((xy) => {
+  applyData(villageTable: { allAttackers: string[], raports: Raport[] }) {
+    const findSingleTargetOfAttacker = (attacker) => {
+      villageTable.raports.forEach(raport => {
+        const attacked = raport.attacked;
+        if (attacker.amount === 1) {
+          if (raport.attackers.find(attackerXY => attackerXY === attacker.village)) {
+            attacker.amount = attacked;
+            return attacker;
+          }
+        }
+      })
+    }
+    villageTable.allAttackers.forEach((xy) => {
       const found: any = this.dataSource.data.find((ans: Village) => ans.village === xy);
       if (found) {
         found.amount++;
@@ -54,7 +86,9 @@ export class RepetitionCounterComponent implements OnInit {
         this.dataSource.data.push({ village: xy, amount: 1 });
       }
     });
-    this.dataSource.data = this.dataSource.data;
+    this.dataSource.data.map(findSingleTargetOfAttacker)
+
+    return this.dataSource.data;
   }
 
 }
