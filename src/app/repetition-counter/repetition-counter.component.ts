@@ -24,12 +24,12 @@ export class RepetitionCounterComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
   }
+
   applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   getTotalAmount() {
-    console.log(this.dataSource.data);
     return this.dataSource.data.map((t: Village) => t.amount).reduce((acc, value) => {
       if (typeof value === 'string') {
         return ++acc;
@@ -43,7 +43,8 @@ export class RepetitionCounterComponent implements OnInit {
     for (const file of event.target.files) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.dataSource.data = this.applyData(this.scrapeData(reader.result));
+        this.applyData(this.scrapeData(reader.result));
+        console.log(this.dataSource.data);
       };
       reader.readAsText(file);
     }
@@ -86,9 +87,16 @@ export class RepetitionCounterComponent implements OnInit {
         this.dataSource.data.push({ village: xy, amount: 1 });
       }
     });
-    this.dataSource.data.map(findSingleTargetOfAttacker)
+    this.dataSource.data.map(findSingleTargetOfAttacker);
+    this.dataSource.data.sort((a: Village, b: Village) =>{
+      if (typeof b.amount === 'string') {
+        return -1;
+      } else {
+        return b.amount -a.amount
+      }
+    });
+    this.dataSource.data = this.dataSource.data;
 
-    return this.dataSource.data;
   }
 
 }

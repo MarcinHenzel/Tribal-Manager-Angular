@@ -35,7 +35,7 @@
       <textarea formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput'
         id='targets'></textarea>
       <div *ngIf="!coordsForm.valid && coordsForm.dirty">
-        Name is required.
+        The total amount of targets must equal senders.
       </div>
     </form>
   </div>

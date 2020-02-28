@@ -5,7 +5,7 @@
   <input matInput #filter (keyup)="applyFilter($event)" placeholder="Filtruj">
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
 
   <ng-container matColumnDef="village">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Village </th>
@@ -23,6 +23,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
-
-<div class="table-container"></div>
 <app-login></app-login>
+
+
