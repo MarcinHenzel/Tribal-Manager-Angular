@@ -18,10 +18,20 @@ export class AnswerTableComponent implements OnInit {
   ngOnInit() {
   }
   showModal = () => this.isModalVisible = true;
+  checkAnswer( index) {
+    if (this.offsAssignedArr[index].checked === false) {
+      (document.querySelector(`#txt-${index}`) as HTMLTextAreaElement).select();
+      document.execCommand('copy');
+    }
+    this.offsAssignedArr[index].checked = !this.offsAssignedArr[index].checked;
+  }
+  deleteAnswer(index) {
+    this.offsAssignedArr.splice(index, 1);
+  }
 
   targetsToReducedStr(order): string {
     const orderClone = JSON.parse(JSON.stringify(order));
-    let str = orderClone.player;
+    let str: string = '';
     for (let j = 0; j < orderClone.targets.length; j++) {
       const xy = orderClone.targets[j];
       let removeCounter = 0;
@@ -71,7 +81,8 @@ export class AnswerTableComponent implements OnInit {
       if (targetsArr.length !== 0) {
         assignedOffs.push({
           player: data.players[i].player,
-          targets: targetsArr
+          targets: targetsArr,
+          checked: false
         });
       }
 

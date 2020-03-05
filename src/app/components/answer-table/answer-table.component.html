@@ -11,12 +11,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr class='row'*ngFor='let order of offsAssignedArr'>
+    <tr class='row'*ngFor='let order of offsAssignedArr; let index=index;'>
       <td class='row__td'>{{order.player}}</td>
-      <td class='row__td'> <textarea class="answer-textarea" value='{{targetsToReducedStr(order)}}' resize='vertical'></textarea></td>
+      <td class='row__td'> <textarea #text id='txt-{{index}}' class="answer-textarea" value='{{targetsToReducedStr(order)}}' resize='vertical'></textarea></td>
       <td class="row__td">
-        <fa-icon [icon]='faCheckCircle'></fa-icon>
-        <fa-icon [icon]='faTrashAlt'></fa-icon>
+        <fa-icon [icon]='faCheckCircle' [ngStyle]="{'color': order.checked ? 'green': 'black'}" (click)="checkAnswer( index)"></fa-icon>
+        <fa-icon [icon]='faTrashAlt' (click)="deleteAnswer(index)"></fa-icon>
       </td>
     </tr>
   </tbody>

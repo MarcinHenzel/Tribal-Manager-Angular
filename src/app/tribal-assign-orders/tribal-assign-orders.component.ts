@@ -7,7 +7,7 @@ import { AnswerTableComponent } from '../components/answer-table/answer-table.co
   styleUrls: ['./tribal-assign-orders.component.scss']
 })
 export class TribalAssignOrdersComponent implements OnInit {
-  data = { targets: [], players: [], ordersPerTarget: 2, randomTargetFactor: 1 };
+  data = { targets: [], players: [], ordersPerTarget: 2, randomTargetFactor: 0 };
   constructor() { }
   @ViewChild(AnswerTableComponent , {static: false}) answerTable: AnswerTableComponent;
   ngOnInit() {
