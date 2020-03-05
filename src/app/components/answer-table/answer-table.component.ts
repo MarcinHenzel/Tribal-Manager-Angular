@@ -40,6 +40,7 @@ export class AnswerTableComponent implements OnInit {
     return str;
   }
   assignOffs(): void {
+    console.log('dsa');
     const assignedOffs = [];
     let targetsCounter = 0;
     const data = JSON.parse(JSON.stringify(this.data));

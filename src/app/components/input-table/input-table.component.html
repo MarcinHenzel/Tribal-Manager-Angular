@@ -1,3 +1,8 @@
+<app-import-modal [@appearAnimation]='isModalVisible' (closeModal)='closeModal($event)' *ngIf='isModalVisible'
+  class="popup" #modal>
+  <ng-content select="h2"></ng-content>
+</app-import-modal>
+
 <table class="table">
   <thead class="thead">
     <tr class="row">
@@ -24,7 +29,3 @@
   </tfoot>
 </table>
 
-<app-import-modal [@appearAnimation]='isModalVisible' (closeModal)='closeModal($event)' *ngIf='isModalVisible'
-  class="popup" #modal>
-  <ng-content select="h2"></ng-content>
-</app-import-modal>

@@ -1,0 +1,8 @@
+...
+Tribal-assign-orders:
+-app-input-table (dataEmitter)="getTargetData($event)"
+	-app-import-modal (closeModal)='closeModal($event)'
+-app-input-table (dataEmitter)="getPlayerData($event)"
+	-app-import-modal (closeModal)='closeModal($event)'
+-app-answer-table
+	- smart modal (lib modal)

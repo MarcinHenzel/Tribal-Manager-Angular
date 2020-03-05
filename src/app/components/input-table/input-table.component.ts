@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter, HostBinding } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
-
 @Component({
   selector: 'app-input-table',
   templateUrl: './input-table.component.html',
@@ -24,18 +23,25 @@ export class InputTableComponent implements OnInit {
   offsAmount: number;
   constructor(private el: ElementRef) { }
   @Output() dataEmitter: EventEmitter<any> = new EventEmitter();
+  @HostBinding('style.zIndex') zindex;
   @HostListener('document:click', ['$event.target'])
   clickout(target: HTMLElement) {
     if (!this.el.nativeElement.contains(target)) {
-      this.isModalVisible = false;
+    this.zindex = '0'
+    this.isModalVisible = false;
     } else if (target.className === 'close') {
-      this.isModalVisible = false;
+    this.zindex = '0'
+    this.isModalVisible = false;
     }
   }
   ngOnInit() {
   }
-  showModal = () => this.isModalVisible = true;
+  showModal = () => {
+    this.isModalVisible = true;
+    this.zindex= '50';
+  }
   closeModal(data: any[]) {
+    this.zindex = '0'
     this.isModalVisible = false;
     this.modalInput = data;
     this.offsAmount = data.reduce((total, obj) => {

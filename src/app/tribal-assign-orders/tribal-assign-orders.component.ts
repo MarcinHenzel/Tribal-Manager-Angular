@@ -21,6 +21,8 @@ export class TribalAssignOrdersComponent implements OnInit {
     this.data.players = data.map((item) => {
       return { player: item.col1, hasOffs: item.col2 };
     });
+    console.log(this.data);
+
   }
   run() {
     console.log(this.data);

@@ -1,5 +1,4 @@
-<main>
-  <app-input-table (dataEmitter)="getTargetData($event)">
+  <app-input-table (dataEmitter)="getTargetData($event)" >
     <th class='col-one row__th'>X|Y</th>
     <th class='col-two row__th'>Offs</th>
     <h2>Targets</h2>
@@ -11,4 +10,3 @@
   </app-input-table>
   <button class='btn-generate animated bounce' (click)='run()'>Generate</button>
   <app-answer-table [data]='data'></app-answer-table>
-</main>
