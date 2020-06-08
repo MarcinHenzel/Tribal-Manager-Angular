@@ -1,0 +1,33 @@
+[b]Wioska:[/b] [coord]611|596[/coord]
+[b]Poziom muru:[/b] 15
+[b]Poparcie:[/b] 53
+
+    [command]attack[/command] Taran, 004 Wioseczka ZUA (605|593) , K56 [coord]605|593[/coord] --> Czas przybycia: 02.06.20 15:33:33:025 [player]Perezzo1[/player]
+    [command]attack[/command] Taran, 002 Wioseczka ZUA (602|593) , K56 [coord]602|593[/coord] --> Czas przybycia: 02.06.20 16:56:26:666 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:04:59:688 [player]Perezzo1[/player]
+	
+[b]Wioska:[/b] [coord]611|597[/coord]
+[b]Poziom muru:[/b] 7
+[b]Poparcie:[/b] 48
+
+    [command]attack[/command] Taran, 001 Cintrum ZUO (606|602) , K66 [coord]606|602[/coord] --> Czas przybycia: 02.06.20 15:43:42:506 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:19:897 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:20:047 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:20:197 [player]Perezzo1[/player]
+
+[b]Wioska:[/b] [coord]611|596[/coord]
+[b]Poziom muru:[/b] 15
+[b]Poparcie:[/b] 53
+
+    [command]attack[/command] Taran, 004 Wioseczka ZUA (605|593) , K56 [coord]605|593[/coord] --> Czas przybycia: 02.06.20 15:33:33:025 [player]Perezzo1[/player]
+    [command]attack[/command] Taran, 002 Wioseczka ZUA (602|593) , K56 [coord]602|593[/coord] --> Czas przybycia: 02.06.20 16:56:26:666 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:04:59:688 [player]Perezzo1[/player]
+	
+[b]Wioska:[/b] [coord]611|597[/coord]
+[b]Poziom muru:[/b] 7
+[b]Poparcie:[/b] 48
+
+    [command]attack[/command] Taran, 001 Cintrum ZUO (606|602) , K66 [coord]606|602[/coord] --> Czas przybycia: 02.06.20 15:43:42:506 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:19:897 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:20:047 [player]Perezzo1[/player]
+    [command]attack[/command] Szlachcic [coord]601|594[/coord] --> Czas przybycia: 02.06.20 20:15:20:197 [player]Perezzo1[/player]
