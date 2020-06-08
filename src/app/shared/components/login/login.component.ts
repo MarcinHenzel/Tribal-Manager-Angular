@@ -1,4 +1,4 @@
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           (err) => {
             console.log(err);
             this.error = err;
-          })
+          });
     }
   }
 }

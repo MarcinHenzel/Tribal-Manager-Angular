@@ -1,6 +1,6 @@
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './shared/services/auth.service';
-import { AnswerTableComponent } from './components/answer-table/answer-table.component';
+import { AnswerTableComponent } from './shared/components/answer-table/answer-table.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,8 +14,8 @@ import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assig
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { InputTableComponent } from './components/input-table/input-table.component';
-import { ImportModalComponent } from './components/import-modal/import-modal.component';
+import { InputTableComponent } from './shared/components/input-table/input-table.component';
+import { ImportModalComponent } from './shared/components/import-modal/import-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RepetitionCounterComponent } from './repetition-counter/repetition-counter.component';
 import { MatTableModule } from '@angular/material';
@@ -25,7 +25,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './shared/components/login/login.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 @NgModule({
   declarations: [
