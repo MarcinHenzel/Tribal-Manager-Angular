@@ -1,8 +1,7 @@
 import { IVillage } from './../interfaces';
 import { IAllies } from './../interfaces';
-import { UtilityService } from './../services/utility.service';
+import { UtilityService } from '../shared/services/utility.service';
 import { Component, OnInit } from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 @Component({
   selector: 'app-tribal-nobles',
   templateUrl: './tribal-nobles.component.html',

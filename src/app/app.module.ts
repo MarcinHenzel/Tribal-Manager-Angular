@@ -1,5 +1,5 @@
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 import { AnswerTableComponent } from './components/answer-table/answer-table.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

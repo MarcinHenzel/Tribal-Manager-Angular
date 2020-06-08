@@ -1,4 +1,4 @@
-import { IVillage } from './../interfaces';
+import { IVillage } from '../../interfaces';
 import { Injectable } from '@angular/core';
 
 @Injectable({

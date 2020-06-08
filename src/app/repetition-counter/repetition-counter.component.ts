@@ -1,14 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable, MatSort } from '@angular/material';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-export interface Village {
-  village: string;
-  amount: any;
-}
-export interface Raport {
-  attacked: string;
-  attackers: string[];
-}
+import { Village, Raport } from '../shared/models';
 @Component({
   selector: 'app-repetition-counter',
   templateUrl: './repetition-counter.component.html',
@@ -96,7 +89,7 @@ export class RepetitionCounterComponent implements OnInit {
       if (typeof b.amount === 'string') {
         return -1;
       } else {
-        return b.amount -a.amount
+        return b.amount - a.amount;
       }
     });
     this.dataSource.data = this.dataSource.data;
