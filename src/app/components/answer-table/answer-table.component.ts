@@ -13,12 +13,11 @@ export class AnswerTableComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   isModalVisible = false;
   constructor() { }
-  /* const answerTextarea = document.getElementById('answersExport'); */
   @Input() data;
   ngOnInit() {
   }
   showModal = () => this.isModalVisible = true;
-  checkAnswer( index) {
+  checkAnswer(index) {
     if (this.offsAssignedArr[index].checked === false) {
       (document.querySelector(`#txt-${index}`) as HTMLTextAreaElement).select();
       document.execCommand('copy');
@@ -50,7 +49,6 @@ export class AnswerTableComponent implements OnInit {
     return str;
   }
   assignOffs(): void {
-    console.log('dsa');
     const assignedOffs = [];
     let targetsCounter = 0;
     const data = JSON.parse(JSON.stringify(this.data));
@@ -85,24 +83,16 @@ export class AnswerTableComponent implements OnInit {
           checked: false
         });
       }
-
     }
     this.targetsAssigned = targetsCounter;
-
     this.offsAssignedArr = assignedOffs;
   }
   randomizeOrdersPerTarget(): number {
     const variation = this.data.randomTargetFactor ? Math.floor(Math.random() * this.data.randomTargetFactor + 1) : 0;
-    if (Math.random() > 0.5) { return this.data.ordersPerTarget + variation; } else {
-      if ((this.data.ordersPerTarget - variation) >= 1) {
-        return this.data.ordersPerTarget - variation;
-      } else {
-        return 1;
-      }
+    if (Math.random() > 0.5) {
+      return this.data.ordersPerTarget + variation;
+    } else {
+      return (this.data.ordersPerTarget - variation) >= 1 ? this.data.ordersPerTarget - variation : 0;
     }
   }
 }
-    /*     const targetsContainer = document.getElementById('targetsCountAnswer');
-targetsContainer.innerHTML = targetsCounter;
-const playersContainer = document.getElementById('playersCountAnswer');
-playersContainer.innerHTML = playerCounter; */
