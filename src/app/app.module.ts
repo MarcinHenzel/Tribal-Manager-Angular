@@ -1,3 +1,4 @@
+import { MaterialModule } from './shared/material.module';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './shared/services/auth.service';
 import { AnswerTableComponent } from './shared/components/answer-table/answer-table.component';
@@ -7,19 +8,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './shared/components/nav/nav.component';
 import { TribalNoblesComponent } from './tribal-nobles/tribal-nobles.component';
 import { BestAttackPlanComponent } from './best-attack-plan/best-attack-plan.component';
 import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assign-orders.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 import { InputTableComponent } from './shared/components/input-table/input-table.component';
 import { ImportModalComponent } from './shared/components/import-modal/import-modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RepetitionCounterComponent } from './repetition-counter/repetition-counter.component';
-import { MatTableModule } from '@angular/material';
-import {MatSortModule} from '@angular/material/sort';
+import { RepetitionCounterComponent } from './repetition-counter/repetition-counter.component';;
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -49,8 +47,6 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     BrowserAnimationsModule,
     MaterialModule,
     FontAwesomeModule,
-    MatTableModule,
-    MatSortModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
