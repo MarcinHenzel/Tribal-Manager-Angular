@@ -20,6 +20,12 @@ export class UtilityService {
     noble: 32.4,
   };
   constructor() { }
+  coordsFromString(coordsText: string): string[] {
+    const coords: string[] = coordsText.split(' ');
+    const pattern = /\d{3}\|\d{3}/;
+    const trueCoords = coords.filter((coord) => pattern.test(coord));
+    return trueCoords;
+  }
   isPlayer(text: string): boolean {
     if (text.length === 7 && text[3] === '|') {
       return false;

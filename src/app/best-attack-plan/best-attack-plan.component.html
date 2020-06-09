@@ -1,6 +1,6 @@
-<main>
+
   <div class="inputs-container">
-    <form class="time-form" [formGroup]="timeForm" novalidate>
+    <form class="form" [formGroup]='coordsForm' (ngSubmit)="findBestAttackPlan()" >
       <fieldset class="sleep-container">
         <h3>Sleep time</h3>
         <mat-form-field class="sleepInput first">
@@ -24,22 +24,23 @@
             {{unit.key}}</mat-option>
         </mat-select>
       </mat-form-field>
-    </form>
-    <form class="coords-form" [formGroup]='coordsForm'>
-      <h3>Senders<span *ngIf='coordsForm.value.sources'>: {{coordsFromString(coordsForm.get('sources').value)}}</span>
+
+      <h3>Senders<span *ngIf='coordsForm.value.sources'>: {{utilityService.coordsFromString(coordsForm.get('sources').value).length}}</span>
       </h3>
-      <textarea formControlName="sources" placeholder="111|222 222|333 333|444..." class='coordInput'
+      <textarea formControlName="sources"  class='coordInput'
         id='offs'></textarea>
-      <h3>Targets<span *ngIf='coordsForm.value.targets'>: {{coordsFromString(coordsForm.get('targets').value)}}</span>
+      <h3>Targets<span *ngIf='coordsForm.value.targets'>: {{utilityService.coordsFromString(coordsForm.get('targets').value).length}}</span>
       </h3>
-      <textarea formControlName="targets" placeholder='111|222 222|333 333|444...' class='coordInput'
+      <textarea formControlName="targets"  class='coordInput'
         id='targets'></textarea>
-      <div *ngIf="!coordsForm.valid && coordsForm.dirty">
-        The total amount of targets must equal senders.
-      </div>
-    </form>
+
+
+  <button class="bestAttackPlan-btn bold" type="submit" [disabled]="coordsForm.invalid" id="inputs-btn">Find Best Attack Plan</button>
+  <div class="error-hint" *ngIf="!coordsForm.valid && coordsForm.dirty">
+    The total amount of targets must equal senders.
   </div>
-  <button class="bestAttackPlan-btn" (click)="findBestAttackPlan()" id="inputs-btn">Find Best Attack Plan</button>
+</form>
+  </div>
   <div class="answer" id='answer'>
     <ul>
       <li class="bold" [ngClass]="{'sleepTime': answer.sleepTime, 'normalTime': !answer.sleepTime}"
@@ -48,4 +49,3 @@
           *ngIf='answer.sleepTime'>Sleep Time</span> </li>
     </ul>
   </div>
-</main>

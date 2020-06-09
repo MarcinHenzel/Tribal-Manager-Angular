@@ -1,9 +1,11 @@
 @import "../../styles.scss";
 $blueBorder: rgb(169, 184, 212);
-main {
+:host {
   display: flex;
   max-height: 100vh;
+  width: 100vw;
   color: $darkGrey;
+  flex-direction: row;
 }
 .inputs-container {
   padding: 10px;
@@ -12,16 +14,28 @@ main {
   flex-direction: column;
   height: 100vh;
   width: 345px;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, .3);
   * {
     color: $darkBlue;
   }
+  .error-hint {
+    color: red;
+  }
+
+}
+.form {
+  width: 100%;
+  height: 80%;
+  display:flex;
+  flex-direction: column;
+}
+.answer {
+  flex: 1;
+  margin: 5px;
+  overflow: auto;
 }
 .datetime-local {
   width: 260px;
-  .time-form {
-    width: 100%;
-    display: flex;
-  }
 }
 .sleep-container {
   padding-left: 5px;
@@ -51,7 +65,7 @@ main {
   }
 }
 .coordInput {
-  height: 100%;
+  height: 30%;
   width: 100%;
   resize: none;
   border-color: $blueBorder;
@@ -59,11 +73,7 @@ main {
     font-size: 1rem;
   }
 }
-.answer {
-  flex: 1;
-  margin: 5px;
-  overflow: auto;
-}
+
 .sleepTime {
   color: rgb(156, 21, 21);
 }
@@ -75,4 +85,18 @@ main {
 }
 .bold {
   font-weight: 600;
+}
+.bestAttackPlan-btn {
+  justify-self: center;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px 0;
+  cursor: pointer;
+
+  &:disabled{
+    cursor: not-allowed;
+    color: rgb(127, 130, 134);
+    background-color: lightgray;
+  }
 }
