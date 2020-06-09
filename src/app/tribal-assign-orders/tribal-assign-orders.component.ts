@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AnswerTableComponent } from '../shared/components/answer-table/answer-table.component';
+import { AnswerTableComponent } from './answer-table/answer-table.component';
 
 @Component({
   selector: 'app-tribal-assign-orders',

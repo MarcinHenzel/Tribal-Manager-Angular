@@ -1,12 +1,15 @@
+import { TribalNoblesComponent } from './tribal-nobles.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { TribalNoblesRoutingModule } from './tribal-nobles-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TribalNoblesComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    TribalNoblesRoutingModule,
   ]
 })
 export class TribalNoblesModule { }

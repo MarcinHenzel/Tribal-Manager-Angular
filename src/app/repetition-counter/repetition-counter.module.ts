@@ -1,10 +1,10 @@
 import { MaterialModule } from './../shared/material.module';
-import { MatTableModule } from '@angular/material';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { RepetitionCounterComponent } from './repetition-counter.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RepetitionCounterRoutingModule } from './repetition-counter-routing.module';
 
 
 
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     MaterialModule,
-    MatTableModule,
+    RepetitionCounterRoutingModule,
     NgxSmartModalModule.forRoot()
   ],
   providers: []

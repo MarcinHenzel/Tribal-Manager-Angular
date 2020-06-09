@@ -1,17 +1,17 @@
-import { RepetitionCounterComponent } from './repetition-counter/repetition-counter.component';
-import { BestAttackPlanComponent } from './best-attack-plan/best-attack-plan.component';
-import { TribalAssignOrdersComponent } from './tribal-assign-orders/tribal-assign-orders.component';
-import { TribalNoblesComponent } from './tribal-nobles/tribal-nobles.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
-  {path: '', component: TribalNoblesComponent},
-  {path: 'tribal-assign-orders', component: TribalAssignOrdersComponent},
-  {path: 'best-attack-plan', component: BestAttackPlanComponent},
-  {path: 'repetition-counter', component: RepetitionCounterComponent},
-];
 
+const routes: Routes = [
+  {path: '', loadChildren: () => import('./tribal-nobles/tribal-nobles.module').then(m => m.TribalNoblesModule)},
+  {path: 'tribal-assign-orders',
+  loadChildren : () => import('./tribal-assign-orders/tribal-assign-orders.module').then(m => m.TribalAssignOrdersModule)},
+  {path: 'best-attack-plan', loadChildren: () => import('./best-attack-plan/best-attack-plan.module').then(m => m.BestAttackPlanModule)},
+  {path: 'repetition-counter',
+  loadChildren: () => import('./repetition-counter/repetition-counter.module').then(m => m.RepetitionCounterModule)},
+  {path: '', redirectTo: '', pathMatch: 'full'}
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
