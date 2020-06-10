@@ -1,7 +1,7 @@
 <table class="table--answers">
   <thead class="thead">
     <tr class="row">
-      <th class='row__th--wide'><a class="row__th__import" href="#popupAnswers">Export</a>
+      <th class='row__th--wide'><a class="row__th__import" (click)="openModal($event)" >Export</a>
       </th>
     </tr>
     <tr class="row">
@@ -13,7 +13,7 @@
   <tbody>
     <tr class='row'*ngFor='let order of offsAssignedArr; let index=index;'>
       <td class='row__td'>{{order.player}}</td>
-      <td class='row__td'> <textarea #text id='txt-{{index}}' class="answer-textarea" value='{{targetsToReducedStr(order)}}' resize='vertical'></textarea></td>
+      <td class='row__td'> <textarea #text id='txt-{{index}}' class="answer-textarea" value='{{targetsToReducedStr(order)}}' ></textarea></td>
       <td class="row__td">
         <fa-icon [icon]='faCheckCircle' [ngStyle]="{'color': order.checked ? 'green': 'black'}" (click)="checkAnswer( index)"></fa-icon>
         <fa-icon [icon]='faTrashAlt' (click)="deleteAnswer(index)"></fa-icon>

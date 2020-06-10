@@ -1,5 +1,7 @@
+import { ExportModalComponent } from './../export-modal/export-modal.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { faCheckCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 @Component({
   selector: 'app-answer-table',
@@ -12,11 +14,21 @@ export class AnswerTableComponent implements OnInit {
   faCheckCircle = faCheckCircle;
   faTrashAlt = faTrashAlt;
   isModalVisible = false;
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
   @Input() data;
   ngOnInit() {
   }
   showModal = () => this.isModalVisible = true;
+  openModal() {
+    console.log(this.offsAssignedArr);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.offsAssignedArr;
+    const dialogRef = this.dialog.open(ExportModalComponent, dialogConfig);
+/*     dialogRef.afterClosed().subscribe(
+      data => console.log(data)
+    ); */
+  }
   checkAnswer(index) {
     if (this.offsAssignedArr[index].checked === false) {
       (document.querySelector(`#txt-${index}`) as HTMLTextAreaElement).select();
@@ -27,7 +39,6 @@ export class AnswerTableComponent implements OnInit {
   deleteAnswer(index) {
     this.offsAssignedArr.splice(index, 1);
   }
-
   targetsToReducedStr(order): string {
     const orderClone = JSON.parse(JSON.stringify(order));
     let str: string = '';
@@ -48,6 +59,7 @@ export class AnswerTableComponent implements OnInit {
     }
     return str;
   }
+
   assignOffs(): void {
     const assignedOffs = [];
     let targetsCounter = 0;

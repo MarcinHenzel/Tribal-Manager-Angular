@@ -1,0 +1,8 @@
+<div class="flex-container">
+  <div class="header">
+    <ng-content class="abc"></ng-content>
+  </div>
+  <textarea class="content"  [value]='ansString'
+    id='targetsImport'></textarea>
+  <button class="import" (click)="close()" >Close</button>
+</div>

@@ -7,17 +7,23 @@ import { Component, OnInit, ElementRef, Input, Output, EventEmitter, HostListene
 export class ImportModalComponent implements OnInit {
   data: string = null;
   @Output() closeModal: EventEmitter<object[]> = new EventEmitter();
-  @HostListener('document:click', ['$event.target'])
+/*   @HostListener('document:click', ['$event.target'])
   close(target: HTMLElement) {
     if (!this.el.nativeElement.contains(target)) {
       if (this.data !== null) this.closeModal.emit(this.dataToArray(this.data));
     } else if (target.className === 'import') {
       if (this.data !== null) this.closeModal.emit(this.dataToArray(this.data));
     }
-  }
+  } */
   constructor(private el: ElementRef) { }
 
   ngOnInit() {
+  }
+  close() {
+    this.closeModal.emit([]);
+  }
+  closeAndSave() {
+    this.closeModal.emit(this.dataToArray(this.data))
   }
   dataToArray(data) {
     const arr: object[] = [];

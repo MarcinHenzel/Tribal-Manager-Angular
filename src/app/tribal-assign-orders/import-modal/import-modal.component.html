@@ -1,9 +1,9 @@
 <div class="flex-container">
   <div class="header">
     <ng-content class="abc"></ng-content>
-    <span class="close" >&times;</span>
+    <span class="close" (click)="close()" >&times;</span>
   </div>
   <textarea class="content" [(ngModel)]='data' placeholder="111|222 offs &#10;111|222 offs"
     id='targetsImport'></textarea>
-  <button class="import">Import</button>
+  <button class="import" (click)="closeAndSave()">Import</button>
 </div>
