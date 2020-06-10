@@ -1,4 +1,4 @@
-import { IVillage } from '../../interfaces';
+import { Village } from '../models';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class UtilityService {
       return true;
     }
   }
-  isInNobleRange(vil1: IVillage, vil2: IVillage): boolean {
+  isInNobleRange(vil1: Village, vil2: Village): boolean {
     const distance = Math.sqrt((Math.pow((vil2.x - vil1.x), 2) + Math.pow((vil2.y - vil1.y), 2)));
     return distance <= 100;
   }

@@ -1,5 +1,4 @@
-import { IVillage } from './../interfaces';
-import { IAllies } from './../interfaces';
+import { Village, Allies} from '../shared/models';
 import { UtilityService } from '../shared/services/utility.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
@@ -8,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tribal-nobles.component.scss']
 })
 export class TribalNoblesComponent implements OnInit {
-  allies: Array<IAllies> = [];
-  target: IVillage = { x: null, y: null };
+  allies: Array<Allies> = [];
+  target: Village = { x: null, y: null };
   answerTable: Array<any> = [];
   constructor(public utility: UtilityService) {
   }

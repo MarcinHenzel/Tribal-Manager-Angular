@@ -1,4 +1,4 @@
-import { IOrder } from './../interfaces';
+import { Order } from '../shared/models';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn } from '@angular/forms';
@@ -9,7 +9,7 @@ import { UtilityService } from '../shared/services/utility.service';
   styleUrls: ['./best-attack-plan.component.scss']
 })
 export class BestAttackPlanComponent implements OnInit {
-  orderArr: IOrder[];
+  orderArr: Order[];
   coordsForm: FormGroup;
   units: any = this.utilityService.unitsSpeed;
   keepOriginalOrder = (a: any) => a.key;
@@ -70,7 +70,7 @@ export class BestAttackPlanComponent implements OnInit {
       const ms = Math.floor(distance * this.coordsForm.value.unit * 60 * 1000);
       const timeAttack = moment(new Date(this.coordsForm.value.destinationTime)).subtract(ms, 'ms');
 
-      const obj: IOrder = {
+      const obj: Order = {
         from: sourceArr[i],
         to: targetArr[i],
         distance,

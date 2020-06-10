@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable, MatSort } from '@angular/material';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { Village, Raport } from '../shared/models';
+import { Raport } from '../shared/models';
 @Component({
   selector: 'app-repetition-counter',
   templateUrl: './repetition-counter.component.html',
@@ -27,7 +27,7 @@ export class RepetitionCounterComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   getTotalAmount() {
-    return this.dataSource.data.map((t: Village) => t.amount).reduce((acc, value) => {
+    return this.dataSource.data.map((t: any) => t.amount).reduce((acc, value) => {
       if (typeof value === 'string') {
         return ++acc;
       } else {
@@ -77,7 +77,7 @@ export class RepetitionCounterComponent implements OnInit {
       })
     }
     villageTable.allAttackers.forEach((xy) => {
-      const found: any = this.dataSource.data.find((ans: Village) => ans.village === xy);
+      const found: any = this.dataSource.data.find((ans: any) => ans.village === xy);
       if (found) {
         found.amount++;
       } else {
@@ -85,7 +85,7 @@ export class RepetitionCounterComponent implements OnInit {
       }
     });
     this.dataSource.data.map(findSingleTargetOfAttacker);
-    this.dataSource.data.sort((a: Village, b: Village) =>{
+    this.dataSource.data.sort((a: any, b: any) =>{
       if (typeof b.amount === 'string') {
         return -1;
       } else {

@@ -1,7 +1,6 @@
 import { AnswerTableComponent } from './../answer-table/answer-table.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { stringify } from 'querystring';
 @Component({
   selector: 'app-export-modal',
   templateUrl: './export-modal.component.html',

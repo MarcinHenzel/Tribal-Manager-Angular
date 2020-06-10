@@ -1,4 +1,4 @@
 export interface Village {
-  village: string;
-  amount: any;
+  x: number;
+  y: number;
 }
