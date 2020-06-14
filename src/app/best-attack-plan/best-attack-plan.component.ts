@@ -1,5 +1,5 @@
 import { Order } from '../shared/models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import * as moment from 'moment';
 import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn } from '@angular/forms';
 import { UtilityService } from '../shared/services/utility.service';
@@ -10,19 +10,22 @@ import { UtilityService } from '../shared/services/utility.service';
 })
 export class BestAttackPlanComponent implements OnInit {
   orderArr: Order[];
+  senderEqualTargets = true;
   coordsForm: FormGroup;
   units: any = this.utilityService.unitsSpeed;
+  @ViewChild('spinner', { static: true }) spinner: ElementRef;
+  senders = '455|604 452|605 453|616 451|612';
+  targets = '506|615 504|604 498|623 480|543';
   keepOriginalOrder = (a: any) => a.key;
-  constructor(private utilityService: UtilityService, private fb: FormBuilder) {
-
+  constructor(private utilityService: UtilityService, private fb: FormBuilder, private renderer: Renderer2) {
 
     this.coordsForm = this.fb.group({
-      destinationTime: new FormControl('', Validators.required),
+      destinationTime: new FormControl(''),
       unit: new FormControl('', Validators.required),
       sleepFrom: new FormControl('', Validators.required),
       sleepTo: new FormControl('', Validators.required),
-      sources: new FormControl('111|222 222|333 333|444', [Validators.required]),
-      targets: new FormControl('222|222 222|353 373|444', [Validators.required])
+      sources: new FormControl(this.senders, [Validators.required]),
+      targets: new FormControl(this.targets, [Validators.required])
     }, {validators: this.validateCoords}
     );
   }
@@ -33,15 +36,20 @@ export class BestAttackPlanComponent implements OnInit {
     const targetsLen = (this.utilityService.coordsFromString(fg.get('targets').value) as string[]).length;
     const sourcesLen = (this.utilityService.coordsFromString(fg.get('sources').value) as string[]).length;
     if (targetsLen === sourcesLen) {
+      this.senderEqualTargets = true;
       return null;
     } else {
+      this.senderEqualTargets = false;
       return { validCoords: true };
     }
   }
 
   findBestAttackPlan() {
-    // TODO: loading adnotation https://stackoverflow.com/questions/54509605/angular-show-loading-spinner-till-methods-finish-execution
+    this.renderer.setStyle(this.spinner.nativeElement, 'display', 'flex');
+    setTimeout(() => {
       this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
+      this.renderer.setStyle(this.spinner.nativeElement, 'display', 'none');
+    }, 10); // some browsers require some more time
   }
   pickBestSet() {
     const sourceArr = this.utilityService.coordsFromString(this.coordsForm.value.sources);

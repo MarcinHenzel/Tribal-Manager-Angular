@@ -1,5 +1,6 @@
 @import "../../styles.scss";
 $blueBorder: rgb(169, 184, 212);
+
 :host {
   display: flex;
   max-height: 100vh;
@@ -7,6 +8,7 @@ $blueBorder: rgb(169, 184, 212);
   color: $darkGrey;
   flex-direction: row;
 }
+
 .inputs-container {
   padding: 10px;
   margin-right: 5px;
@@ -15,60 +17,74 @@ $blueBorder: rgb(169, 184, 212);
   height: 100vh;
   width: 345px;
   box-shadow: 3px 5px 10px rgba(0, 0, 0, .3);
+
   * {
     color: $darkBlue;
   }
+
   .error-hint {
     color: red;
   }
 
 }
+
 .form {
   width: 100%;
   height: 80%;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
+
 .answer {
   flex: 1;
   margin: 5px;
   overflow: auto;
 }
+
 .datetime-local {
   width: 260px;
 }
+
 .sleep-container {
   padding-left: 5px;
   margin-bottom: 15px;
   border: 1px solid $blueBorder;
 }
+
 .sleepInput {
   width: 125px;
+
   input::placeholder {
     font-size: 12px;
   }
+
   &.first {
     margin-right: 8px;
   }
 }
+
 .armySpeed-container {
   width: 260px;
 }
+
 .coords-form {
   display: flex;
   width: 100%;
   height: 70%;
   flex-direction: column;
   align-items: center;
+
   & label {
     font-size: 1.3rem;
   }
 }
+
 .coordInput {
   height: 30%;
   width: 100%;
   resize: none;
   border-color: $blueBorder;
+
   &::placeholder {
     font-size: 1rem;
   }
@@ -77,15 +93,19 @@ $blueBorder: rgb(169, 184, 212);
 .sleepTime {
   color: rgb(156, 21, 21);
 }
+
 .bestAttackPlan-btn {
   margin: 0 10px;
 }
+
 .normalTime {
   color: rgb(26, 150, 47);
 }
+
 .bold {
   font-weight: 600;
 }
+
 .bestAttackPlan-btn {
   justify-self: center;
   font-size: 18px;
@@ -94,9 +114,26 @@ $blueBorder: rgb(169, 184, 212);
   padding: 10px 0;
   cursor: pointer;
 
-  &:disabled{
+  &:disabled {
     cursor: not-allowed;
     color: rgb(127, 130, 134);
     background-color: lightgray;
+  }
+}
+
+.loading-spinner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+  justify-content: center;
+
+  & p {
+    color: white;
+    font-weight: 900;
+    font-size: 30px;
+    align-self: center;
+    justify-items: center;
   }
 }
