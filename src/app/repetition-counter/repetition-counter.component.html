@@ -1,11 +1,19 @@
-<input type='file' multiple  (change)='openFile($event)'><br>
-<button (click)="ngxSmartModalService.getModal('myModal').open()">Export</button>
+<div class="btn-container">
+  <label [class.uploaded]="isUploaded" class="btn custom-upload">
+    <p *ngIf="!isUploaded; else uploaded">Upload Files</p>
+    <ng-template #uploaded>
+      <p>Files Uploaded</p>
+    </ng-template>
+    <input type='file' multiple (change)='openFile($event)'><br>
+  </label>
+  <button class="btn" (click)="openExportModal()">Export</button>
+</div>
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput #filter (keyup)="applyFilter($event)" placeholder="Filtruj">
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   <ng-container matColumnDef="village">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Village </th>
@@ -23,14 +31,3 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
-<!-- <app-login></app-login> -->
-
-
-<ngx-smart-modal #myModal identifier="myModal" identifier="myModal">
-  <h1>Data:</h1>
-  <div class="data-container">
-    <p>Village attacks</p>
-    <p *ngFor="let row of myModal.getData()" >{{row.village}} {{row.amount}}</p>
-  </div>
-  <button (click)="myModal.close()">Close</button>
-</ngx-smart-modal>

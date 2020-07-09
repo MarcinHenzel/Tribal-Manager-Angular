@@ -1,7 +1,5 @@
 <app-nav></app-nav>
-<ul>
-<!--   <li class="text" *ngFor="let user of users | async">
-    {{user.name}}
-  </li> -->
-</ul>
-<router-outlet></router-outlet>
+
+<main [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute: ''">
+  <router-outlet #outlet="outlet" ></router-outlet>
+</main>

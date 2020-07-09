@@ -1,0 +1,21 @@
+<!--
+<div class="data-container">
+  <p>Village attacks</p>
+  <p *ngFor="let row of myModal.getData()">{{row.village}} {{row.amount}}</p>
+</div>
+<button (click)="myModal.close()">Close</button> -->
+
+<div class="modal">
+<!--   <div class="header">
+
+  </div> -->
+  <header class="header">Village attacks</header>
+  <div #container class="data-container">
+    <p *ngFor="let row of data.data">{{row.village}} {{row.amount}}</p>
+  </div>
+<div class="btn-container">
+  <button class="btn close" (click)="close()">Close</button>
+  <button class="btn copy" (click)="copy(container)">Copy</button>
+</div>
+
+</div>

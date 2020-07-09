@@ -14,7 +14,6 @@ export class ExportModalComponent implements OnInit {
     this.ansString = this.toString(this.data);
   }
   close() {
-
     this.dialogRef.close();
   }
   toString(data): string {
@@ -27,7 +26,7 @@ export class ExportModalComponent implements OnInit {
   }
   targetsToReducedStr(order): string {
     const orderClone = JSON.parse(JSON.stringify(order));
-    let str: string = '';
+    let str = '';
     for (let j = 0; j < orderClone.targets.length; j++) {
       const xy = orderClone.targets[j];
       let removeCounter = 0;

@@ -1,6 +1,6 @@
+import { ExportDialogCounterComponent } from './export-dialog-counter/export-dialog-counter.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTable, MatSort } from '@angular/material';
-import { NgxSmartModalService } from 'ngx-smart-modal';
+import { MatTableDataSource, MatTable, MatSort, MatDialogConfig, MatDialog } from '@angular/material';
 import { Raport } from '../shared/models';
 @Component({
   selector: 'app-repetition-counter',
@@ -12,10 +12,10 @@ export class RepetitionCounterComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+  isUploaded = false;
   displayedColumns: string[] = ['village', 'amount'];
   dataSource = new MatTableDataSource();
-  // modal lib https://github.com/biig-io/ngx-smart-modal
-  constructor(public ngxSmartModalService: NgxSmartModalService) {
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -25,6 +25,12 @@ export class RepetitionCounterComponent implements OnInit {
   applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  openExportModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {data: this.dataSource.data};
+    this.dialog.open( ExportDialogCounterComponent, dialogConfig);
   }
   getTotalAmount() {
     return this.dataSource.data.map((t: any) => t.amount).reduce((acc, value) => {
@@ -36,12 +42,13 @@ export class RepetitionCounterComponent implements OnInit {
     }, 0);
   }
   openFile = (event) => {
+    console.log(event);
+    this.isUploaded = true;
     this.dataSource.data = [];
     for (const file of event.target.files) {
       const reader = new FileReader();
       reader.onload = () => {
         this.applyData(this.scrapeData(reader.result));
-        this.ngxSmartModalService.setModalData(this.dataSource.data, 'myModal');
       };
       reader.readAsText(file);
     }

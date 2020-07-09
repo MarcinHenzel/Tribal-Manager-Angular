@@ -37,7 +37,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     AngularFirestoreModule,
     HttpClientModule,
     AngularFireAuthModule,
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

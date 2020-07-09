@@ -1,0 +1,36 @@
+$modalWidth: 50vw;
+.modal {
+  width: $modalWidth;
+  height: 70vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+.header {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+.header::after {
+  content: '';
+  left: 0;
+  bottom: 0;
+  border-bottom: 1px solid black;
+  width: $modalWidth;
+  position: absolute;
+}
+.data-container {
+  overflow: auto;
+  flex-grow: 21;
+
+}
+.btn-container {
+  flex-grow: 1;
+  width: 40vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  height: 3em;
+}

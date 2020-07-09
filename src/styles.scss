@@ -6,6 +6,20 @@ $darkBlue: rgb(16, 92, 116);
 $white: rgb(230, 230, 230);
 $gold-white: rgb(245, 241, 185);
 $lightgrey: rgb(70, 70, 70);
+@mixin shadowBox {
+  box-shadow: 7px 10px 10px rgba(0, 0, 0, 0.30);
+}
+.btn {
+  margin-top: 1.4rem;
+  font-size: 1.5rem;
+  padding: .4em 1.4em;
+  border-radius: 5px;
+  background-color: $lightgrey;
+  color: white;
+  border: none;
+  cursor: pointer;
+  @include shadowBox;
+}
 *,
 *:before,
 *:after {

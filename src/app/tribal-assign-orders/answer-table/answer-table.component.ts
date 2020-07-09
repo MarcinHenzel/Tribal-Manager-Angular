@@ -20,14 +20,11 @@ export class AnswerTableComponent implements OnInit {
   }
   showModal = () => this.isModalVisible = true;
   openModal() {
-    console.log(this.offsAssignedArr);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.offsAssignedArr;
-    const dialogRef = this.dialog.open(ExportModalComponent, dialogConfig);
-/*     dialogRef.afterClosed().subscribe(
-      data => console.log(data)
-    ); */
+     this.dialog.open(ExportModalComponent, dialogConfig);
+
   }
   checkAnswer(index) {
     if (this.offsAssignedArr[index].checked === false) {
@@ -41,7 +38,7 @@ export class AnswerTableComponent implements OnInit {
   }
   targetsToReducedStr(order): string {
     const orderClone = JSON.parse(JSON.stringify(order));
-    let str: string = '';
+    let str = '';
     for (let j = 0; j < orderClone.targets.length; j++) {
       const xy = orderClone.targets[j];
       let removeCounter = 0;

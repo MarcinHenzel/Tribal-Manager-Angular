@@ -1,11 +1,20 @@
 @import "../../styles.scss";
 :host {
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 60vw;
+  height: 100vh;
+}
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+  width: 60vw;
 }
 table, mat-form-field {
-  width: 40%;
+  width: 100%;
 }
 
 th.mat-sort-header-sorted {
@@ -13,4 +22,23 @@ th.mat-sort-header-sorted {
 }
 tr.mat-footer-row {
   font-weight: bold;
+}
+
+.custom-upload {
+  padding: 0 1.4em;
+  transition: all .4s ;
+  p {
+    margin-top: 24px;
+  }
+}
+input[type="file"] {
+  display: none;
+}
+
+.uploaded {
+  background-color: rgb(41, 109, 46);
+}
+ngx-smart-modal {
+  width: 100vw;
+  height: 100vh;
 }
