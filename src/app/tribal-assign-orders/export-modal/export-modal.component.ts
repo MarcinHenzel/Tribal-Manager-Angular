@@ -18,6 +18,7 @@ export class ExportModalComponent implements OnInit {
   }
   toString(data): string {
     let ans = '';
+    if(data === null) return ans;
     data.forEach(orders => {
       ans += `${orders.player}\r`;
       ans += this.targetsToReducedStr(orders);

@@ -27,10 +27,10 @@ export class InputTableComponent implements OnInit {
   @HostListener('document:click', ['$event.target'])
   clickout(target: HTMLElement) {
     if (!this.el.nativeElement.contains(target)) {
-    this.zindex = '0'
+    this.zindex = '0';
     this.isModalVisible = false;
     } else if (target.className === 'close') {
-    this.zindex = '0'
+    this.zindex = '0';
     this.isModalVisible = false;
     }
   }
@@ -41,7 +41,7 @@ export class InputTableComponent implements OnInit {
     this.zindex= '50';
   }
   closeModal(data: any[]) {
-    this.zindex = '0'
+    this.zindex = '0';
     this.isModalVisible = false;
     this.modalInput = data;
     this.offsAmount = data.reduce((total, obj) => {

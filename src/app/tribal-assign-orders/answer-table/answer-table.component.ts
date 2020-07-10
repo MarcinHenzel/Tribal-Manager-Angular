@@ -18,12 +18,11 @@ export class AnswerTableComponent implements OnInit {
   @Input() data;
   ngOnInit() {
   }
-  showModal = () => this.isModalVisible = true;
   openModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.offsAssignedArr;
-     this.dialog.open(ExportModalComponent, dialogConfig);
+    this.dialog.open(ExportModalComponent, dialogConfig);
 
   }
   checkAnswer(index) {
