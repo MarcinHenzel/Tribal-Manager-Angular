@@ -34,6 +34,6 @@ import { MatDialogModule } from '@angular/material';
     FontAwesomeModule,
     MatDialogModule
   ],
-  entryComponents: [ExportModalComponent]
+  entryComponents: [ExportModalComponent, ImportModalComponent]
 })
 export class TribalAssignOrdersModule { }

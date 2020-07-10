@@ -1,10 +1,10 @@
-  <app-input-table (dataEmitter)="getTargetData($event)" >
+  <app-input-table type="VILLAGES" (dataEmitter)="getTargetData($event)" >
     <th class='col-one row__th'>X|Y</th>
     <th class='col-two row__th'>Offs</th>
     <h2>Targets</h2>
   </app-input-table>
-  <app-input-table (dataEmitter)="getPlayerData($event)">
-    <th class='col-one row__th'>Players</th>
+  <app-input-table type="PLAYERS" (dataEmitter)="getPlayerData($event)">
+    <th class='col-one row__th'>Player</th>
     <th class='col-two row__th'>Offs</th>
     <h2>Players</h2>
   </app-input-table>

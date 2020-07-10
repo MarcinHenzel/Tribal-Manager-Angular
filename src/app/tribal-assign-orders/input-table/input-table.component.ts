@@ -1,5 +1,8 @@
-import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter, HostBinding } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter, HostBinding, Input } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { ImportModalComponent } from '../import-modal/import-modal.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import {tap} from 'rxjs/operators';
 @Component({
   selector: 'app-input-table',
   templateUrl: './input-table.component.html',
@@ -21,33 +24,31 @@ export class InputTableComponent implements OnInit {
   modalInput: any[];
   tableLength: number;
   offsAmount: number;
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private dialog: MatDialog) { }
+  @Input() type: string;
   @Output() dataEmitter: EventEmitter<any> = new EventEmitter();
-  @HostBinding('style.zIndex') zindex;
-  @HostListener('document:click', ['$event.target'])
-  clickout(target: HTMLElement) {
-    if (!this.el.nativeElement.contains(target)) {
-    this.zindex = '0';
-    this.isModalVisible = false;
-    } else if (target.className === 'close') {
-    this.zindex = '0';
-    this.isModalVisible = false;
-    }
-  }
+
   ngOnInit() {
   }
   showModal = () => {
-    this.isModalVisible = true;
-    this.zindex= '50';
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    if(this.type === 'VILLAGES') {
+      dialogConfig.data = {headerMes: 'Write village coords and amount of offs to assign'};
+    } else {
+      dialogConfig.data = {headerMes: 'Write players name and amount of offs they have'};
+    }
+    const dialogRef = this.dialog.open(ImportModalComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === undefined) return;
+      this.modalInput = result;
+      this.offsAmount = result.reduce((total, obj) => {
+        return total + parseInt(obj.col2, 10);
+      }, 0);
+      this.dataEmitter.emit(this.modalInput);
+    });
+
   }
-  closeModal(data: any[]) {
-    this.zindex = '0';
-    this.isModalVisible = false;
-    this.modalInput = data;
-    this.offsAmount = data.reduce((total, obj) => {
-      return total + parseInt(obj.col2, 10);
-    }, 0);
-    this.dataEmitter.emit(this.modalInput);
-  }
+
 
 }

@@ -1,23 +1,25 @@
-import { Component, OnInit, ElementRef, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter, HostListener, Inject } from '@angular/core';
+import { AnswerTableComponent } from '../answer-table/answer-table.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-import-modal',
   templateUrl: './import-modal.component.html',
   styleUrls: ['./import-modal.component.scss']
 })
 export class ImportModalComponent implements OnInit {
-  data: string = null;
-  @Output() closeModal: EventEmitter<object[]> = new EventEmitter();
-  constructor(private el: ElementRef) { }
+  coordInput: string = null;
+  constructor(private dialogRef: MatDialogRef<AnswerTableComponent>, @Inject(MAT_DIALOG_DATA) public dataHost: any) { }
 
   ngOnInit() {
   }
   close() {
-    this.closeModal.emit([]);
+    this.dialogRef.close();
   }
   closeAndSave() {
-    this.closeModal.emit(this.dataToArray(this.data))
+    this.dialogRef.close(this.dataToArray(this.coordInput));
   }
   dataToArray(data) {
+    if(data === null) return []
     const arr: object[] = [];
     const rows = data.split('\n');
     for (let i = 0; i < rows.length; i++) {
