@@ -41,15 +41,14 @@
   </form>
 </div>
 <div class="answer" id='answer'>
-  <ul>
-    <li class="bold" [ngClass]="{'sleepTime': answer.sleepTime, 'normalTime': !answer.sleepTime}"
-      *ngFor="let answer of orderArr; let i = index">
-      {{i+1}}. {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}} <span
-        *ngIf='answer.sleepTime'>Sleep Time</span> </li>
-  </ul>
-  <mat-spinner *ngIf="spinnerVis"></mat-spinner>
+
+  <mat-spinner class="spinner" *ngIf="spinnerVis; else content"></mat-spinner>
+  <ng-template #content>
+    <ul>
+      <li class="bold" [ngClass]="{'sleepTime': answer.sleepTime, 'normalTime': !answer.sleepTime}"
+        *ngFor="let answer of orderArr; let i = index">
+        {{i+1}}. {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}} <span
+          *ngIf='answer.sleepTime'>Sleep Time</span> </li>
+    </ul>
+  </ng-template>
 </div>
-<!-- <div #spinner class="loading-spinner">
-  <p>LOADING</p>
-</div>
- -->
