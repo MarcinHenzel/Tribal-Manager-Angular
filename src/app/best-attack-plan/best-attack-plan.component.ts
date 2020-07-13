@@ -12,8 +12,10 @@ export class BestAttackPlanComponent implements OnInit {
   orderArr: Order[];
   senderEqualTargets = true;
   coordsForm: FormGroup;
-  units: any = this.utilityService.unitsSpeed;
-  @ViewChild('spinner', { static: true }) spinner: ElementRef;
+  units: any;
+  spinnerVis: boolean;
+  worker: Worker;
+  /*   @ViewChild('spinner', { static: true }) spinner: ElementRef; */
   senders = '455|604 452|605 453|616 451|612';
   targets = '506|615 504|604 498|623 480|543';
   keepOriginalOrder = (a: any) => a.key;
@@ -26,10 +28,23 @@ export class BestAttackPlanComponent implements OnInit {
       sleepTo: new FormControl('', Validators.required),
       sources: new FormControl(this.senders, [Validators.required]),
       targets: new FormControl(this.targets, [Validators.required])
-    }, {validators: this.validateCoords}
+    }, { validators: this.validateCoords }
     );
   }
+
   ngOnInit() {
+    this.units = this.utilityService.unitsSpeed;
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      console.log('trying worker');
+      this.worker = new Worker('./get-plan.worker', { type: 'module' });
+      this.worker.onmessage = ({ data }) => {
+        this.orderArr = JSON.parse(data).sort((a, b) => (a.distance < b.distance) ? 1 : -1);
+      };
+    }
+  }
+  amountOfCoords(type: string): number {
+    return this.utilityService.coordsFromString(this.coordsForm.get(type).value).length;
   }
   validateCoords: ValidatorFn = (fg: FormGroup) => {
     if (fg.get('targets').value === '' || fg.get('sources').value === '') return null
@@ -45,70 +60,85 @@ export class BestAttackPlanComponent implements OnInit {
   }
 
   findBestAttackPlan() {
-    this.renderer.setStyle(this.spinner.nativeElement, 'display', 'flex');
-    setTimeout(() => {
-      this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
-      this.renderer.setStyle(this.spinner.nativeElement, 'display', 'none');
-    }, 10); // some browsers require some more time
-  }
-  pickBestSet() {
-    const sourceArr = this.utilityService.coordsFromString(this.coordsForm.value.sources);
-    const targetArr = this.utilityService.coordsFromString(this.coordsForm.value.targets);
-    let bestApproach = {
-      orders: [],
-      points: 0
-    };
-    for (let i = 0; i < 20000; i++) {
-      (sourceArr as string[]).sort(() => Math.random() - 0.5);
-      (targetArr as string[]).sort(() => Math.random() - 0.5);
-      const approach = this.createOrders(sourceArr, targetArr);
-      if (bestApproach.points < approach.points) {
-        bestApproach = {
-          orders: approach.orders,
-          points: approach.points
-        };
+    let coords = {
+      sourceArr: this.utilityService.coordsFromString(this.coordsForm.value.sources),
+      targetArr: this.utilityService.coordsFromString(this.coordsForm.value.targets),
+      coordsForm: {
+        destinationTime: this.coordsForm.value.destinationTime,
+        unit: this.coordsForm.value.unit,
+        sleepFrom: this.coordsForm.value.sleepFrom,
+        sleepTo: this.coordsForm.value.sleepTo,
+        sources: this.coordsForm.value.sources,
+        targets: this.coordsForm.value.targets
       }
     }
-    return bestApproach.orders;
+    this.worker.postMessage(coords);
   }
-  createOrders(sourceArr, targetArr) {
-    const approach = { orders: [], points: 0 };
-    for (let i = 0; i < sourceArr.length; i++) {
-      const distance = this.utilityService.countDistance(sourceArr[i], targetArr[i]);
-      const ms = Math.floor(distance * this.coordsForm.value.unit * 60 * 1000);
-      const timeAttack = moment(new Date(this.coordsForm.value.destinationTime)).subtract(ms, 'ms');
+  /*     this.orderArr = (this.worker.postMessage(coords) as any).sort((a, b) => (a.distance < b.distance) ? 1 : -1); */
+  /* this.renderer.setStyle(this.spinner.nativeElement, 'display', 'flex');
+  setTimeout(() => {
+    this.orderArr = this.pickBestSet().sort((a, b) => (a.distance < b.distance) ? 1 : -1);
+    this.renderer.setStyle(this.spinner.nativeElement, 'display', 'none');
+  }, 10); */ // some browsers require some more time
 
-      const obj: Order = {
-        from: sourceArr[i],
-        to: targetArr[i],
-        distance,
-        ms,
-        timeAttack,
-        sleepTime: this.inSleepTime(timeAttack.hour())
+pickBestSet() {
+  const sourceArr = this.utilityService.coordsFromString(this.coordsForm.value.sources);
+  const targetArr = this.utilityService.coordsFromString(this.coordsForm.value.targets);
+  let bestApproach = {
+    orders: [],
+    points: 0
+  };
+  for (let i = 0; i < 20000; i++) {
+    (sourceArr as string[]).sort(() => Math.random() - 0.5);
+    (targetArr as string[]).sort(() => Math.random() - 0.5);
+    const approach = this.createOrders(sourceArr, targetArr);
+    if (bestApproach.points < approach.points) {
+      bestApproach = {
+        orders: approach.orders,
+        points: approach.points
       };
-      if (!obj.sleepTime) {
-        approach.points++;
-      }
-      approach.orders.push(obj);
     }
-    return approach;
   }
-  inSleepTime(hour: number) {
-    const from = this.coordsForm.value.sleepFrom;
-    const to = this.coordsForm.value.sleepTo;
-    let midnightPast = true;
-    if (from > to) {
-      midnightPast = false;
+  return bestApproach.orders;
+}
+createOrders(sourceArr, targetArr) {
+  const approach = { orders: [], points: 0 };
+  for (let i = 0; i < sourceArr.length; i++) {
+    const distance = this.utilityService.countDistance(sourceArr[i], targetArr[i]);
+    const ms = Math.floor(distance * this.coordsForm.value.unit * 60 * 1000);
+    const timeAttack = moment(new Date(this.coordsForm.value.destinationTime)).subtract(ms, 'ms');
+
+    const obj: Order = {
+      from: sourceArr[i],
+      to: targetArr[i],
+      distance,
+      ms,
+      timeAttack,
+      sleepTime: this.inSleepTime(timeAttack.hour())
+    };
+    if (!obj.sleepTime) {
+      approach.points++;
     }
-    for (let i = from; i < to || midnightPast === false; i++) {
-      if (i === 24) {
-        midnightPast = true;
-        i = 0;
-      }
-      if (i === hour) {
-        return true;
-      }
-    }
-    return false;
+    approach.orders.push(obj);
   }
+  return approach;
+}
+inSleepTime(hour: number) {
+  const from = this.coordsForm.value.sleepFrom;
+  const to = this.coordsForm.value.sleepTo;
+  let midnightPast = true;
+  if (from > to) {
+    midnightPast = false;
+  }
+  for (let i = from; i < to || midnightPast === false; i++) {
+    if (i === 24) {
+      midnightPast = true;
+      i = 0;
+    }
+    if (i === hour) {
+      return true;
+    }
+  }
+  return false;
+}
 }

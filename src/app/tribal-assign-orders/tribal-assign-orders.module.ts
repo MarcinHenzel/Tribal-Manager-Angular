@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 
 import { TribalAssignOrdersRoutingModule } from './tribal-assign-orders-routing.module';
 import { ExportModalComponent } from './export-modal/export-modal.component';
-import { MatDialogModule } from '@angular/material';
 
 
 @NgModule({
@@ -32,7 +31,6 @@ import { MatDialogModule } from '@angular/material';
     ReactiveFormsModule,
     MaterialModule,
     FontAwesomeModule,
-    MatDialogModule
   ],
   entryComponents: [ExportModalComponent, ImportModalComponent]
 })

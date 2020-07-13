@@ -3,3 +3,4 @@ firebase.json
 .firebaserc
 dist
 src/environments
+src/environments/environment.prod

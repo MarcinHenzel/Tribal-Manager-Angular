@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { fadeAnimation } from './shared/animations/fadeOutAnimation';
@@ -9,8 +9,10 @@ import { fadeAnimation } from './shared/animations/fadeOutAnimation';
   styleUrls: ['./app.component.scss'],
   animations: [fadeAnimation]
 })
-export class AppComponent {
-  users: Observable<any[]>;
-  constructor( private http: HttpClient) {
+export class AppComponent implements OnInit {
+  ngOnInit() {
+
+  }
+  constructor( ) {
   }
 }

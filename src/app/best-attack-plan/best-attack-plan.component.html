@@ -25,11 +25,11 @@
     </mat-form-field>
 
       <h3>Senders<span *ngIf='coordsForm.value.sources'>:
-          {{utilityService.coordsFromString(coordsForm.get('sources').value).length}}</span>
+          {{amountOfCoords('sources')}}</span>
       </h3>
       <textarea formControlName="sources" class='coordInput' id='offs'></textarea>
       <h3>Targets<span *ngIf='coordsForm.value.targets'>:
-          {{utilityService.coordsFromString(coordsForm.get('targets').value).length}}</span>
+          {{amountOfCoords('targets')}}</span>
       </h3>
       <textarea formControlName="targets" class='coordInput' id='targets'></textarea>
       <div class="error-hint" *ngIf="!senderEqualTargets && coordsForm.dirty">
@@ -47,7 +47,9 @@
       {{i+1}}. {{answer.timeAttack | date: 'medium'}} Source: {{answer.from}} Target: {{answer.to}} <span
         *ngIf='answer.sleepTime'>Sleep Time</span> </li>
   </ul>
+  <mat-spinner *ngIf="spinnerVis"></mat-spinner>
 </div>
-<div #spinner class="loading-spinner">
+<!-- <div #spinner class="loading-spinner">
   <p>LOADING</p>
 </div>
+ -->
