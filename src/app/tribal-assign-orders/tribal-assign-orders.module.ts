@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './../app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginComponent } from './../shared/components/login/login.component';
 import { AnswerTableComponent } from './answer-table/answer-table.component';
 import { ImportModalComponent } from './import-modal/import-modal.component';
 import { InputTableComponent } from './input-table/input-table.component';
@@ -22,7 +21,6 @@ import { ExportModalComponent } from './export-modal/export-modal.component';
     InputTableComponent,
     ImportModalComponent,
     AnswerTableComponent,
-    LoginComponent,
     ExportModalComponent],
   imports: [
     CommonModule,
